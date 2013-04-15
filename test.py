@@ -1,6 +1,7 @@
 # apply
 apply(hello, args, kwargs)
 
+
 # basestring
 basestring
 
@@ -9,6 +10,7 @@ buffer('hello', 1, 3)
 
 # callable
 callable('hello')
+
 
 # dict
 d.keys()
@@ -48,3 +50,6 @@ d.has_key('foobar')
 # imports
 import StringIO
 import dbm
+
+
+test_unicode = u'Hello World'
