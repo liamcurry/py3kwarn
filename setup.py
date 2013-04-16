@@ -1,19 +1,21 @@
 #!/usr/bin/env python
-from py3kwarn import __version__
+from setuptools import setup
 
 
-with open('README.rst') as f:
-    long_description = f.read()
+def get_version(fname='py3kwarn/__init__.py'):
+    with open(fname) as f:
+        for line in f:
+            if line.startswith('__version__'):
+                return eval(line.split('=')[-1])
 
 
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
+def get_long_description():
+    with open('README.rst') as f:
+        return f.read()
 
 
 setup(name='py3kwarn',
-      version=__version__,
+      version=get_version(),
       description=('A small wrapper around lib2to3 to help write Python 3 '
                    'compatible code.'),
       author='Liam Curry',
@@ -21,12 +23,8 @@ setup(name='py3kwarn',
       url='https://github.com/liamcurry/py3kwarn',
       license='MIT',
       packages=['py3kwarn'],
-      include_package_data=True,
-      package_data={
-          '': ['README.rst']
-      },
       scripts=['py3kwarn/py3kwarn'],
-      long_description=long_description,
+      long_description=get_long_description(),
       classifiers=[
           'Environment :: Console',
           'Intended Audience :: Developers',
