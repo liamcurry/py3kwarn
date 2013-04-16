@@ -1,7 +1,9 @@
-# py3kwarn
+# py3kwarn [![Build Status](https://travis-ci.org/liamcurry/py3kwarn.png)][travis]
 
 py3kwarn is a small wrapper around lib2to3 to help write Python3 compatible
 code. It provides flake8-style warning messages.
+
+Pull requests are welcome.
 
 ## Use with vim
 
@@ -12,3 +14,4 @@ add `let g:syntastic_python_checkers=['flake8', 'py3kwarn']` to your vim
 config.
 
 [my-fork]: https://github.com/liamcurry/syntastic/tree/py3kwarn
+[travis]: https://travis-ci.org/liamcurry/py3kwarn
