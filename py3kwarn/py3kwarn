@@ -106,10 +106,20 @@ class WarnRefactoringTool(refactor.RefactoringTool):
         return tree.was_changed
 
 
+_rt = WarnRefactoringTool(refactor.get_fixers_from_package('lib2to3.fixes'))
+
+
+def warnings_for_string(string):
+    # TODO
+    pass
+
+
+def warnings_for_files(filenames):
+    _rt.refactor(filenames)
+    return sorted(_rt.warnings, key=lambda warning: warning[0])
+
+
 if __name__ == '__main__':
     import sys
-    rt = WarnRefactoringTool(refactor.get_fixers_from_package('lib2to3.fixes'))
-    rt.refactor([sys.argv[1], ])
-    warnings = sorted(rt.warnings, key=lambda warning: warning[0])
-    for warning in warnings:
+    for warning in warnings_for_files([sys.argv[1], ]):
         print warning[1]
