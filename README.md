@@ -13,7 +13,7 @@ See the [lib2to3][lib2to3] documentation for information on warning messages.
 
 Install using `pip install py3kwarn`, or to install from the git repository:
 
-```zsh
+```shell
 git clone git://github.com/liamcurry/py3kwarn.git
 cd py3kwarn
 make install
@@ -23,7 +23,9 @@ make install
 
 ### From the command line
 
-`py3kwarn test.py`
+```shell
+py3kwarn test.py
+```
 
 ### With vim
 
@@ -38,13 +40,11 @@ let g:syntastic_python_checkers=['flake8', 'py3kwarn']
 
 ## TODO
 
-- [x] Add tests
-- [x] Installable via pip
-- [ ] An option for friendlier messages would be nice.
-- [ ] [A flake8 extension][flake8-ext].
-- [ ] Use argparse to add some smarter options.
-- [ ] Better docs
-- [ ] Make it work with Python 2.6
+- An option for friendlier messages would be nice.
+- [A flake8 extension][flake8-ext].
+- Use argparse to add some smarter options.
+- Better docs
+- Make it work with Python 2.6
 
 
 [my-fork]: https://github.com/liamcurry/syntastic/tree/py3kwarn
