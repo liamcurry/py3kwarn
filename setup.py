@@ -3,17 +3,15 @@ import sys
 from py3kwarn import __version__
 
 
-kwargs = {}
+with open('README.md') as f:
+    long_description = f.read()
+
 
 if sys.version_info[0] == 3:
     from distutils.core import setup
 else:
     try:
         from setuptools import setup
-        kwargs = {
-            'tests_require': ['nose'],
-            'test_suite': 'nose.collector',
-        }
     except ImportError:
         from distutils.core import setup
 
@@ -26,9 +24,9 @@ setup(name='py3kwarn',
       author='Liam Curry',
       author_email='liam@curry.name',
       url='https://github.com/liamcurry/py3kwarn',
-      packages=['py3kwarn', 'py3kwarn.tests'],
+      packages=['py3kwarn'],
       scripts=['py3kwarn/py3kwarn'],
-      long_description=open('README').read(),
+      long_description=long_description,
       classifiers=[
           'Environment :: Console',
           'Intended Audience :: Developers',
@@ -36,4 +34,4 @@ setup(name='py3kwarn',
           'Programming Language :: Python',
           'Topic :: Software Development',
           'Topic :: Utilities',
-      ], **kwargs)
+      ])

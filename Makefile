@@ -9,7 +9,7 @@ install:
 
 clean:
 	rm -Rf build dist
-	find . -name "*.pyc" -or "*.egg-info" -delete
+	find . -name "*.pyc" -o -name "*.egg-info" -delete
 
 test:
 	python -m py3kwarn.tests
