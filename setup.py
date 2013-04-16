@@ -13,17 +13,17 @@ except ImportError:
 
 
 setup(name='py3kwarn',
-      license='MIT',
       version=__version__,
-      description=('A small wrapper around lib2to3 that provide warnings '
-                   'messages for Python 3 incompatible code.'),
+      description=('A small wrapper around lib2to3 to help write Python 3 '
+                   'compatible code.'),
       author='Liam Curry',
       author_email='liam@curry.name',
       url='https://github.com/liamcurry/py3kwarn',
+      license='MIT',
       packages=['py3kwarn'],
       include_package_data=True,
       package_data={
-          '': ['*.rst']
+          '': ['README.rst']
       },
       scripts=['py3kwarn/py3kwarn'],
       long_description=long_description,
