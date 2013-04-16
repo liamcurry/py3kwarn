@@ -22,6 +22,7 @@ config.
 * An option for friendlier messages would be nice.
 * [A flake8 extension][flake8-ext].
 * Use argparse to add some smarter options.
+* Better docs
 
 
 [my-fork]: https://github.com/liamcurry/syntastic/tree/py3kwarn

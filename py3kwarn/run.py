@@ -40,10 +40,11 @@ class WarnRefactoringTool(refactor.RefactoringTool):
             True if the tree was modified, False otherwise.
         """
         self.warnings = []
+
         for fixer in chain(self.pre_order, self.post_order):
             fixer.start_tree(tree, name)
 
-        #use traditional matching for the incompatible fixers
+        # use traditional matching for the incompatible fixers
         self.traverse_by(self.bmi_pre_order_heads, tree.pre_order())
         self.traverse_by(self.bmi_post_order_heads, tree.post_order())
 
@@ -72,7 +73,8 @@ class WarnRefactoringTool(refactor.RefactoringTool):
                             # previous transformation ; skip
                             continue
 
-                        if node.fixers_applied and fixer in node.fixers_applied:
+                        if node.fixers_applied and \
+                           fixer in node.fixers_applied:
                             # do not apply the same fixer again
                             continue
 
@@ -104,7 +106,9 @@ class WarnRefactoringTool(refactor.RefactoringTool):
             fixer.finish_tree(tree, name)
         return tree.was_changed
 
+
 _rt = WarnRefactoringTool(refactor.get_fixers_from_package('lib2to3.fixes'))
+
 
 def warnings_for_string(data, name):
     data += '\n'  # Silence certain parse errors
@@ -123,4 +127,4 @@ def warnings_for_files(filenames):
 def main():
     import sys
     for warning in warnings_for_files([sys.argv[1], ]):
-        print warning[1]
+        print(warning[1])
