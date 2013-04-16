@@ -1,19 +1,15 @@
 #!/usr/bin/env python
-import sys
 from py3kwarn import __version__
 
 
-with open('README.md') as f:
+with open('README.rst') as f:
     long_description = f.read()
 
 
-if sys.version_info[0] == 3:
+try:
+    from setuptools import setup
+except ImportError:
     from distutils.core import setup
-else:
-    try:
-        from setuptools import setup
-    except ImportError:
-        from distutils.core import setup
 
 
 setup(name='py3kwarn',
@@ -25,6 +21,10 @@ setup(name='py3kwarn',
       author_email='liam@curry.name',
       url='https://github.com/liamcurry/py3kwarn',
       packages=['py3kwarn'],
+      include_package_data=True,
+      package_data={
+          '': ['*.rst']
+      },
       scripts=['py3kwarn/py3kwarn'],
       long_description=long_description,
       classifiers=[

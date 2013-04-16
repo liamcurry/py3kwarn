@@ -8,8 +8,8 @@ install:
 	python setup.py install
 
 clean:
-	rm -Rf build dist
-	find . -name "*.pyc" -o -name "*.egg-info" -delete
+	rm -Rf build dist py3kwarn.egg-info
+	find . -name "*.pyc" -delete
 
 test:
 	python -m py3kwarn.tests

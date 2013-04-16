@@ -1,4 +1,6 @@
-== py3kwarn License (MIT) ==
+======================
+py3kwarn License (MIT)
+======================
 
 Copyright (C) 2013 Liam Curry <liam@curry.name>
 
