@@ -20,9 +20,7 @@ Installation
 
 ...or to install from the git repository::
 
-   $ git clone git://github.com/liamcurry/py3kwarn.git
-   $ cd py3kwarn
-   $ make install
+   $ pip install -e git+git://github.com/liamcurry/py3kwarn.git#egg=py3kwarn
 
 Usage from the command line
 ---------------------------
