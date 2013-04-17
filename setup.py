@@ -32,4 +32,5 @@ setup(name='py3kwarn',
           'Programming Language :: Python',
           'Topic :: Software Development',
           'Topic :: Utilities',
-      ])
+      ],
+      test_suite='py3kwarn.tests')

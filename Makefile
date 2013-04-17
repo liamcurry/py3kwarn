@@ -12,6 +12,6 @@ clean:
 	find . -name "*.pyc" -delete
 
 test:
-	python -m py3kwarn.tests
+	python setup.py test
 
 .PHONY: test all
