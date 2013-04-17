@@ -22,13 +22,6 @@ Installation
 
    $ pip install -e git+git://github.com/liamcurry/py3kwarn.git#egg=py3kwarn
 
-Usage from the command line
----------------------------
-
-::
-
-   $ py3kwarn [filename]
-
 Usage with vim
 --------------
 
@@ -37,6 +30,20 @@ another syntax checker (like flake8), then you will have to add this to your
 vim config::
 
    let g:syntastic_python_checkers=['flake8', 'py3kwarn']
+
+Usage from the command line
+---------------------------
+
+::
+
+   $ py3kwarn [filename]
+
+Testing
+-------
+
+Testing can be done with ``make test``. py3kwarn also supports `tox`_, which
+assumes `pythonbrew`_ is installed. This enables quickly testing changes in
+many versions of python. Take a look at the ``tox.ini`` file for more details.
 
 TODO
 ----
@@ -50,7 +57,6 @@ TODO
   forwards compatible code. Make this the default.
 - Make it faster. Right now it is quite slow compared to other syntax checkers.
   Major refactoring may be necessary.
-- `tox support`_
 
 
 .. _with syntastic: https://github.com/scrooloose/syntastic/blob/master/syntax_checkers/python/py3kwarn.vim
@@ -58,4 +64,5 @@ TODO
 .. _lib2to3: http://docs.python.org/2.6/library/2to3.html#fixers
 .. |travis| image:: https://travis-ci.org/liamcurry/py3kwarn.png
 .. _travis: https://travis-ci.org/liamcurry/py3kwarn
-.. _tox support: http://tox.readthedocs.org/en/latest/
+.. _tox: http://tox.readthedocs.org/en/latest/
+.. _pythonbrew: https://github.com/utahta/pythonbrew

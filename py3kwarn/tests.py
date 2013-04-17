@@ -92,6 +92,5 @@ class TestPy3kWarn(unittest.TestCase):
         self._test_code('unicode')
 
 
-
 if __name__ == '__main__':
     unittest.main()
