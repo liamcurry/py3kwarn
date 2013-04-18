@@ -21,6 +21,8 @@ setup(name=APP_NAME,
           'py3kwarn',
           'py3kwarn2to3', 'py3kwarn2to3.fixes', 'py3kwarn2to3.pgen2'
       ],
+      package_data={'py3kwarn2to3': ['*.txt']},
+      zip_safe=False,
       scripts=['py3kwarn/py3kwarn'],
       long_description=open('README.rst').read(),
       classifiers=[
