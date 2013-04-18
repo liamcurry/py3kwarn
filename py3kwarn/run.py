@@ -140,6 +140,11 @@ def main():
     import sys
     if sys.version_info >= (3, 0):
         print("py3kwarn requires Python 2.6 or 2.7")
-    else:
-        for warning in warnings_for_files([sys.argv[1], ]):
-            print(warning[1])
+        return 1
+
+    status = 0
+    for warning in warnings_for_files([sys.argv[1], ]):
+        print(warning[1])
+        status = 2
+
+    return status
