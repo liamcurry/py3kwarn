@@ -2,8 +2,8 @@
 # coding=utf-8
 
 from itertools import chain
-from lib2to3 import refactor, pytree
-from lib2to3.fixer_util import find_root
+from py3kwarn2to3 import refactor, pytree
+from py3kwarn2to3.fixer_util import find_root
 
 
 def to_warn_str(node):
@@ -110,7 +110,7 @@ class WarnRefactoringTool(refactor.RefactoringTool):
         return tree.was_changed
 
 
-_rt = WarnRefactoringTool(refactor.get_fixers_from_package('lib2to3.fixes'))
+_rt = WarnRefactoringTool(refactor.get_fixers_from_package('py3kwarn2to3.fixes'))
 
 
 def warnings_for_string(data, name):
