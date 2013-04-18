@@ -12,7 +12,7 @@ script:
     - py3kwarn setup.py
 
 after_success:
-    - pip install --quiet coveralls
+    - pip install --quiet --use-mirrors coveralls
     - coverage run --branch --omit='*/py3kwarn2to3/*,*/site-packages/*,*/distutils/*' setup.py --quiet test
     - coverage report --show-missing
     - coveralls
