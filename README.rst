@@ -1,6 +1,14 @@
-==================
-py3kwarn |travis|_
-==================
+========
+py3kwarn
+========
+
+.. image:: https://travis-ci.org/liamcurry/py3kwarn.png?branch=master
+   :target: https://travis-ci.org/liamcurry/py3kwarn
+   :alt: Build status
+
+.. image:: https://coveralls.io/repos/liamcurry/py3kwarn/badge.png?branch=master
+   :target: https://coveralls.io/r/liamcurry/py3kwarn
+   :alt: Test coverage status
 
 py3kwarn is a small wrapper around lib2to3 to help write Python3 compatible
 code. It provides flake8-style warning messages.
@@ -86,7 +94,5 @@ TODO
 .. _with syntastic: https://github.com/scrooloose/syntastic/blob/master/syntax_checkers/python/py3kwarn.vim
 .. _A flake8 extension: http://flake8.readthedocs.org/en/latest/extensions.html
 .. _lib2to3: http://docs.python.org/2.6/library/2to3.html#fixers
-.. |travis| image:: https://travis-ci.org/liamcurry/py3kwarn.png
-.. _travis: https://travis-ci.org/liamcurry/py3kwarn
 .. _tox: http://tox.readthedocs.org/en/latest/
 .. _pythonbrew: https://github.com/utahta/pythonbrew
