@@ -1,7 +1,9 @@
 #! /usr/bin/env python
 # coding=utf-8
 
+import os
 import unittest
+
 from py3kwarn import run
 
 
@@ -94,7 +96,8 @@ class TestPy3kWarn(unittest.TestCase):
         self._test_code('unicode')
 
     def test_main(self):
-        run.main([])
+        run.main([os.path.join(os.path.dirname(__file__),
+                               'tests.py')])
 
 
 if __name__ == '__main__':
