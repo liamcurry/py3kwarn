@@ -9,7 +9,7 @@ install:
 
 script:
     - python setup.py --quiet test
-    - py3kwarn2to3 setup.py
+    - py3kwarn setup.py
 
 after_success:
     - pip install --quiet coveralls
