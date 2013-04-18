@@ -13,7 +13,6 @@ Installation
 ------------
 
 **Requires Python 2.6 or 2.7+**
-**Requires Python 2.6 or 2.7+**
 
 ::
 
