@@ -12,7 +12,7 @@ See the lib2to3_ documentation for information on warning messages.
 Installation
 ------------
 
-**Requires Python 2.7+**
+**Requires Python 2.6 or 2.7+**
 
 ::
 
@@ -45,13 +45,22 @@ Testing can be done with ``make test``. py3kwarn also supports `tox`_, which
 assumes `pythonbrew`_ is installed. This enables quickly testing changes in
 many versions of python. Take a look at the ``tox.ini`` file for more details.
 
+Contributing
+------------
+To contribute, fork the repo and clone to your local machine.
+
+Create a virtual environment and ::
+
+    pip install -r requirements_dev.txt
+
+Then just make a pull request with the issues you've fixed!
+
 TODO
 ----
 
 - Friendlier messages.
 - `A flake8 extension`_.
 - Use argparse to add smarter options.
-- Make it work with Python 2.6
 - Flags to ignore certain errors
 - Compatibility mode, where warning messages provide suggestions to write
   forwards compatible code. Make this the default.
