@@ -48,6 +48,7 @@ many versions of python. Take a look at the ``tox.ini`` file for more details.
 
 Contributing
 ------------
+
 To contribute, fork the repo and clone to your local machine.
 
 Create a virtual environment and ::
