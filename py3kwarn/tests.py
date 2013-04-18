@@ -2,7 +2,7 @@
 # coding=utf-8
 
 import unittest
-from py3kwarn.run import warnings_for_string
+from py3kwarn import run
 
 
 code_apply = "apply(hello, args, kwargs)"
@@ -41,7 +41,7 @@ code_unicode = "u'Hello World'"
 class TestPy3kWarn(unittest.TestCase):
 
     def _test_code(self, name, casename=None):
-        warnings = warnings_for_string(globals()['code_' + name], name)
+        warnings = run.warnings_for_string(globals()['code_' + name], name)
 
         if not casename:
             casename = 'Fix' + name.title()
@@ -92,6 +92,9 @@ class TestPy3kWarn(unittest.TestCase):
 
     def test_unicode(self):
         self._test_code('unicode')
+
+    def test_main(self):
+        run.main([])
 
 
 if __name__ == '__main__':

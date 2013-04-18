@@ -2,6 +2,8 @@
 # coding=utf-8
 
 from itertools import chain
+import sys
+
 from py3kwarn2to3 import refactor, pytree
 from py3kwarn2to3.fixer_util import find_root
 
@@ -132,18 +134,22 @@ def warnings_for_string(data, name):
 
 
 def warnings_for_files(filenames):
+    if not filenames:
+        return []
     _rt.refactor(filenames)
     return sorted(_rt.warnings, key=lambda warning: warning[0])
 
 
-def main():
-    import sys
+def main(args=None):
+    if args is None:
+        args = sys.argv[1:]
+
     if sys.version_info >= (3, 0):
         print("py3kwarn requires Python 2.6 or 2.7")
         return 1
 
     status = 0
-    for warning in warnings_for_files([sys.argv[1], ]):
+    for warning in warnings_for_files(args):
         print(warning[1])
         status = 2
 
