@@ -19,7 +19,7 @@ setup(name=APP_NAME,
       license='MIT',
       packages=[
           'py3kwarn',
-          'py3kwarn2to3', 'py3kwarn2to3.fixes', 'py3kwarn2to3.pgen2', 'py3kwarn2to3.tests'
+          'py3kwarn2to3', 'py3kwarn2to3.fixes', 'py3kwarn2to3.pgen2'
       ],
       scripts=['py3kwarn/py3kwarn'],
       long_description=open('README.rst').read(),
