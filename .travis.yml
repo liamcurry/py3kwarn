@@ -14,6 +14,5 @@ script:
 after_success:
     - pip install --quiet coveralls
     - coverage run --branch --omit='*/py3kwarn2to3/*,*/site-packages/*,*/distutils/*' setup.py --quiet test
-    - coverage run --branch --append --module=py3kwarn.run setup.py
     - coverage report --show-missing
     - coveralls
