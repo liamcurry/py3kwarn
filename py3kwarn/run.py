@@ -17,10 +17,19 @@ def to_warn_str(node):
     return ''.join(lines).strip()
 
 
+# Ignore warnings that are irrelevant to Python 3 compatibility.
+INNOCUOUS_WARNINGS = [
+    'FixFuture'
+]
+
+
 class WarnRefactoringTool(refactor.RefactoringTool):
 
     def add_to_warnings(self, filename, fixer, node, new):
         fixer_name = fixer.__class__.__name__
+        if fixer_name in INNOCUOUS_WARNINGS:
+            return
+
         if not hasattr(self, 'warnings'):
             self.warnings = []
         warning = '%s -> %s' % (to_warn_str(node), to_warn_str(new))

@@ -30,7 +30,6 @@ test.func_name
 test.func_closure
 test.func_dict
 """
-code_future = "from __future__ import absolute_import"
 code_has_key = "d.has_key('foobar')"
 code_imports = """
 import StringIO
@@ -83,9 +82,6 @@ class TestPy3kWarn(unittest.TestCase):
     def test_funcattrs(self):
         #self._test_code('funcattrs')
         pass
-
-    def test_future(self):
-        self._test_code('future')
 
     def test_has_key(self):
         self._test_code('has_key', 'HasKey')
