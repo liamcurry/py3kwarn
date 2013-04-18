@@ -1,3 +1,6 @@
+#! /usr/bin/env python
+# coding=utf-8
+
 from itertools import chain
 from lib2to3 import refactor, pytree
 from lib2to3.fixer_util import find_root

@@ -1,35 +1,36 @@
-#!/usr/bin/env python
+#! /usr/bin/env python
+# coding=utf-8
+
+from __future__ import with_statement
 from setuptools import setup
 
+APP_NAME = 'py3kwarn'
 
-def get_version(fname='py3kwarn/__init__.py'):
-    with open(fname) as f:
-        for line in f:
-            if line.startswith('__version__'):
-                return eval(line.split('=')[-1])
+with open('py3kwarn/__init__.py') as f:
+    VERSION = f.readline().split('=')[1]
 
 
-def get_long_description():
-    with open('README.rst') as f:
-        return f.read()
-
-
-setup(name='py3kwarn',
-      version=get_version(),
-      description=('A small wrapper around lib2to3 to help write Python 3 '
-                   'compatible code.'),
+setup(name=APP_NAME,
+      version=VERSION,
+      description='A small wrapper around lib2to3 to help write Python 3 compatible code.',
       author='Liam Curry',
       author_email='liam@curry.name',
       url='https://github.com/liamcurry/py3kwarn',
       license='MIT',
-      packages=['py3kwarn'],
+      packages=[
+          'py3kwarn',
+          'lib2to3', 'lib2to3.fixes', 'lib2to3.pgen2', 'lib2to3.tests'
+      ],
       scripts=['py3kwarn/py3kwarn'],
-      long_description=get_long_description(),
+      long_description=open('README.rst').read(),
       classifiers=[
           'Environment :: Console',
           'Intended Audience :: Developers',
           'License :: OSI Approved :: MIT License',
           'Programming Language :: Python',
+          'Programming Language :: Python :: 2',
+          'Programming Language :: Python :: 2.6',
+          'Programming Language :: Python :: 2.7',
           'Topic :: Software Development',
           'Topic :: Utilities',
       ],

@@ -1,4 +1,6 @@
-#!/usr/bin/env python
+#! /usr/bin/env python
+# coding=utf-8
+
 import unittest
 from py3kwarn.run import warnings_for_string
 
@@ -41,10 +43,14 @@ class TestPy3kWarn(unittest.TestCase):
 
     def _test_code(self, name, casename=None):
         warnings = warnings_for_string(globals()['code_' + name], name)
+
         if not casename:
             casename = 'Fix' + name.title()
+
         self.assertTrue(len(warnings))
-        self.assertIn(casename, warnings[0][1])
+
+        self.assertTrue(casename in warnings[0][1])
+
         return warnings
 
     def test_apply(self):
