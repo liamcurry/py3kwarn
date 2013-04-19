@@ -4,6 +4,8 @@
 from itertools import chain
 import sys
 
+from . import __version__
+
 from py3kwarn2to3 import refactor, pytree
 from py3kwarn2to3.fixer_util import find_root
 
@@ -19,18 +21,10 @@ def to_warn_str(node):
     return ''.join(lines).strip()
 
 
-# Ignore warnings that are irrelevant to Python 3 compatibility.
-#INNOCUOUS_WARNINGS = [
-#    'FixFuture'
-#]
-
-
 class WarnRefactoringTool(refactor.RefactoringTool):
 
     def add_to_warnings(self, filename, fixer, node, new):
         fixer_name = fixer.__class__.__name__
-        #if fixer_name in INNOCUOUS_WARNINGS:
-        #    return
 
         if not hasattr(self, 'warnings'):
             self.warnings = []
@@ -143,6 +137,12 @@ def warnings_for_files(filenames):
 def main(args=None):
     if args is None:
         args = sys.argv[1:]
+
+    import optparse
+    parser = optparse.OptionParser(
+        version='autopep8: %s' % __version__,
+        prog='py3kwarn')
+    options, args = parser.parse_args(args)
 
     if sys.version_info >= (3, 0):
         print("py3kwarn requires Python 2.6 or 2.7")
