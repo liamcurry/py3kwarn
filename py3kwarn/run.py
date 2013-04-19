@@ -140,7 +140,7 @@ def main(args=None):
 
     import optparse
     parser = optparse.OptionParser(
-        version='autopep8: %s' % __version__,
+        version='py3kwarn {0}'.format(__version__),
         prog='py3kwarn')
     options, args = parser.parse_args(args)
 
