@@ -3,8 +3,10 @@
 
 from __future__ import with_statement
 
-from setuptools import setup
+import ast
 import sys
+
+from setuptools import setup
 
 
 if sys.version_info >= (3, 0):
@@ -13,7 +15,9 @@ if sys.version_info >= (3, 0):
 APP_NAME = 'py3kwarn'
 
 with open('py3kwarn/__init__.py') as f:
-    VERSION = f.readline().split('=')[1]
+    for line in f:
+        if line.startswith('__version__'):
+            VERSION = ast.parse(line).body[0].value.s
 
 
 setup(name=APP_NAME,
