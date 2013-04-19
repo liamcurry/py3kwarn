@@ -2,7 +2,13 @@
 # coding=utf-8
 
 from __future__ import with_statement
+
 from setuptools import setup
+import sys
+
+
+if sys.version_info >= (3, 0):
+    raise SystemExit("py3kwarn requires Python 2.6 or 2.7")
 
 APP_NAME = 'py3kwarn'
 
@@ -12,7 +18,8 @@ with open('py3kwarn/__init__.py') as f:
 
 setup(name=APP_NAME,
       version=VERSION,
-      description='A small wrapper around lib2to3 to help write Python 3 compatible code.',
+      description='A small wrapper around lib2to3 to help write Python 3 '
+                  'compatible code.',
       author='Liam Curry',
       author_email='liam@curry.name',
       url='https://github.com/liamcurry/py3kwarn',

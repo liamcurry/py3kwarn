@@ -144,10 +144,6 @@ def main(args=None):
         prog='py3kwarn')
     options, args = parser.parse_args(args)
 
-    if sys.version_info >= (3, 0):
-        print("py3kwarn requires Python 2.6 or 2.7")
-        return 1
-
     status = 0
     for warning in warnings_for_files(args):
         print(warning[1])
