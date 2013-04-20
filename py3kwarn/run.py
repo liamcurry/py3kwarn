@@ -26,9 +26,15 @@ class WarnRefactoringTool(refactor.RefactoringTool):
     def add_to_warnings(self, filename, fixer, node, new):
         fixer_name = fixer.__class__.__name__
 
+        from_string = to_warn_str(node)
+        to_string = to_warn_str(new)
+
+        if from_string == to_string:
+            return
+
         if not hasattr(self, 'warnings'):
             self.warnings = []
-        warning = '%s -> %s' % (to_warn_str(node), to_warn_str(new))
+        warning = '%s -> %s' % (from_string, to_string)
         self.warnings.append((node.get_lineno(), '%s:%s:1: PY3K (%s) %s' % (
             filename, node.get_lineno(), fixer_name, warning)))
 
