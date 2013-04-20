@@ -9,7 +9,7 @@ install:
 
 script:
     - python setup.py --quiet test
-    - py3kwarn py3kwarn/__init__.py
+    - py3kwarn setup.py
 
 after_success:
     - pip install --quiet --use-mirrors coveralls
