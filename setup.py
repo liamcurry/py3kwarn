@@ -9,9 +9,6 @@ import sys
 from setuptools import setup
 
 
-if sys.version_info >= (3, 0):
-    raise SystemExit("py3kwarn requires Python 2.6 or 2.7")
-
 APP_NAME = 'py3kwarn'
 
 with open('py3kwarn/__init__.py') as f:
