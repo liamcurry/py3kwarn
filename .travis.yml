@@ -10,7 +10,7 @@ install:
 script:
     - python setup.py --quiet test
     - py3kwarn setup.py
-    - py3kwarn example.py | grep 'FixExcept'
+    - py3kwarn example.py | grep --quiet 'FixExcept'
 
 after_success:
     - pip install --quiet --use-mirrors coveralls
