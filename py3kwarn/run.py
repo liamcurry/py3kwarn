@@ -52,6 +52,7 @@ class WarnRefactoringTool(refactor.RefactoringTool):
 
         Returns:
             True if the tree was modified, False otherwise.
+
         """
         self.warnings = []
 
@@ -68,12 +69,13 @@ class WarnRefactoringTool(refactor.RefactoringTool):
         while any(match_set.values()):
             for fixer in self.BM.fixers:
                 if fixer in match_set and match_set[fixer]:
-                    #sort by depth; apply fixers from bottom(of the AST) to top
+                    # sort by depth; apply fixers from bottom(of the AST) to
+                    # top
                     match_set[fixer].sort(key=pytree.Base.depth, reverse=True)
 
                     if fixer.keep_line_order:
-                        #some fixers(eg fix_imports) must be applied
-                        #with the original file's line order
+                        # some fixers(eg fix_imports) must be applied
+                        # with the original file's line order
                         match_set[fixer].sort(key=pytree.Base.get_lineno)
 
                     for node in list(match_set[fixer]):
@@ -99,7 +101,7 @@ class WarnRefactoringTool(refactor.RefactoringTool):
                             if new is not None:
                                 node.replace(new)
                                 self.add_to_warnings(name, fixer, node, new)
-                                #new.fixers_applied.append(fixer)
+                                # new.fixers_applied.append(fixer)
                                 for node in new.post_order():
                                     # do not apply the fixer again to
                                     # this or any subnode
@@ -121,7 +123,9 @@ class WarnRefactoringTool(refactor.RefactoringTool):
         return tree.was_changed
 
 
-_rt = WarnRefactoringTool(refactor.get_fixers_from_package('py3kwarn2to3.fixes'))
+_rt = WarnRefactoringTool(
+    refactor.get_fixers_from_package(
+        'py3kwarn2to3.fixes'))
 
 
 def warnings_for_string(data, name):

@@ -152,7 +152,7 @@ class BottomMatcher(object):
                 print("%d -> %d [label=%s] //%s" %
                       (node.id, subnode.id, type_repr(subnode_key), str(subnode.fixers)))
                 if subnode_key == 1:
-                    print((subnode.content))
+                    print(subnode.content)
                 print_node(subnode)
         print_node(self.root)
         print("}")
