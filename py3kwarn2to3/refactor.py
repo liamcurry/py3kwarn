@@ -19,7 +19,10 @@ import sys
 import logging
 import operator
 import collections
-import StringIO
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
 from itertools import chain
 
 # Local imports
@@ -28,6 +31,12 @@ from .fixer_util import find_root
 from . import pytree, pygram
 from . import btm_utils as bu
 from . import btm_matcher as bm
+
+
+try:
+    unicode
+except NameError:
+    unicode = str
 
 
 def get_all_fix_names(fixer_pkg, remove_prefix=True):
@@ -94,7 +103,7 @@ def _get_headnode_dict(fixer_list):
                 head_nodes[fixer._accept_type].append(fixer)
             else:
                 every.append(fixer)
-    for node_type in chain(pygram.python_grammar.symbol2number.itervalues(),
+    for node_type in chain(pygram.python_grammar.symbol2number.values(),
                            pygram.python_grammar.tokens):
         head_nodes[node_type].extend(every)
     return dict(head_nodes)
@@ -129,9 +138,9 @@ else:
 
 def _detect_future_features(source):
     have_docstring = False
-    gen = tokenize.generate_tokens(StringIO.StringIO(source).readline)
+    gen = tokenize.generate_tokens(StringIO(source).readline)
     def advance():
-        tok = gen.next()
+        tok = next(gen)
         return tok[0], tok[1]
     ignore = frozenset((token.NEWLINE, tokenize.NL, token.COMMENT))
     features = set()
@@ -656,7 +665,8 @@ class RefactoringTool(object):
 
     def wrap_toks(self, block, lineno, indent):
         """Wraps a tokenize stream to systematically modify start/end."""
-        tokens = tokenize.generate_tokens(self.gen_lines(block, indent).next)
+        tokens = tokenize.generate_tokens(
+            lambda: next(self.gen_lines(block, indent)))
         for type, value, (line0, col0), (line1, col1), line_text in tokens:
             line0 += lineno - 1
             line1 += lineno - 1
@@ -713,7 +723,7 @@ class MultiprocessRefactoringTool(RefactoringTool):
         self.queue = multiprocessing.JoinableQueue()
         self.output_lock = multiprocessing.Lock()
         processes = [multiprocessing.Process(target=self._child)
-                     for i in xrange(num_processes)]
+                     for i in range(num_processes)]
         try:
             for p in processes:
                 p.start()
@@ -721,7 +731,7 @@ class MultiprocessRefactoringTool(RefactoringTool):
                                                               doctests_only)
         finally:
             self.queue.join()
-            for i in xrange(num_processes):
+            for i in range(num_processes):
                 self.queue.put(None)
             for p in processes:
                 if p.is_alive():

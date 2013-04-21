@@ -19,7 +19,10 @@ __all__ = ["Driver", "load_grammar"]
 import codecs
 import os
 import logging
-import StringIO
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
 import sys
 
 # Pgen imports
@@ -102,7 +105,7 @@ class Driver(object):
 
     def parse_string(self, text, debug=False):
         """Parse a string and return the syntax tree."""
-        tokens = tokenize.generate_tokens(StringIO.StringIO(text).readline)
+        tokens = tokenize.generate_tokens(StringIO(text).readline)
         return self.parse_tokens(tokens, debug)
 
 
@@ -123,7 +126,7 @@ def load_grammar(gt="Grammar.txt", gp=None,
             logger.info("Writing grammar tables to %s", gp)
             try:
                 g.dump(gp)
-            except IOError, e:
+            except IOError as e:
                 logger.info("Writing failed:"+str(e))
     else:
         g = grammar.Grammar()

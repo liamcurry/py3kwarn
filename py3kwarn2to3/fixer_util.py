@@ -10,6 +10,12 @@ from .pygram import python_symbols as syms
 from . import patcomp
 
 
+try:
+    unicode
+except NameError:
+    unicode = str
+
+
 ###########################################################
 ### Common node-construction "macros"
 ###########################################################

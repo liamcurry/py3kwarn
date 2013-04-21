@@ -14,7 +14,16 @@ __author__ = "Guido van Rossum <guido@python.org>"
 
 import sys
 import warnings
-from StringIO import StringIO
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
+
+try:
+    unicode
+except NameError:
+    unicode = basestring = str
+
 
 HUGE = 0x7FFFFFFF  # maximum repeat count, default max
 
@@ -733,7 +742,7 @@ class WildcardPattern(BasePattern):
         """
         if self.content is None:
             # Shortcut for special case (see __init__.__doc__)
-            for count in xrange(self.min, 1 + min(len(nodes), self.max)):
+            for count in range(self.min, 1 + min(len(nodes), self.max)):
                 r = {}
                 if self.name:
                     r[self.name] = nodes[:count]

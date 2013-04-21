@@ -3,6 +3,8 @@
 
 """Safely evaluate Python string literals without using eval()."""
 
+from __future__ import print_function
+
 import re
 
 simple_escapes = {"a": "\a",
@@ -53,7 +55,7 @@ def test():
         s = repr(c)
         e = evalString(s)
         if e != c:
-            print i, c, s, e
+            print(i, c, s, e)
 
 
 if __name__ == "__main__":

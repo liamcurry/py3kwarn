@@ -5,6 +5,13 @@
 from .. import fixer_base
 from ..fixer_util import Name, attr_chain
 
+
+try:
+    unicode
+except NameError:
+    unicode = str
+
+
 MAPPING = {'StringIO':  'io',
            'cStringIO': 'io',
            'cPickle': 'pickle',

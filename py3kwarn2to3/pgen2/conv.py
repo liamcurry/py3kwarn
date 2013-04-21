@@ -26,6 +26,8 @@ without having to invoke the Python pgen C program.
 
 """
 
+from __future__ import print_function
+
 # Python imports
 import re
 
@@ -60,8 +62,8 @@ class Converter(grammar.Grammar):
         """
         try:
             f = open(filename)
-        except IOError, err:
-            print "Can't open %s: %s" % (filename, err)
+        except IOError as err:
+            print("Can't open %s: %s" % (filename, err))
             return False
         self.symbol2number = {}
         self.number2symbol = {}
@@ -70,8 +72,8 @@ class Converter(grammar.Grammar):
             lineno += 1
             mo = re.match(r"^#define\s+(\w+)\s+(\d+)$", line)
             if not mo and line.strip():
-                print "%s(%s): can't parse %s" % (filename, lineno,
-                                                  line.strip())
+                print("%s(%s): can't parse %s" % (filename, lineno,
+                                                  line.strip()))
             else:
                 symbol, number = mo.groups()
                 number = int(number)
@@ -111,8 +113,8 @@ class Converter(grammar.Grammar):
         """
         try:
             f = open(filename)
-        except IOError, err:
-            print "Can't open %s: %s" % (filename, err)
+        except IOError as err:
+            print("Can't open %s: %s" % (filename, err))
             return False
         # The code below essentially uses f's iterator-ness!
         lineno = 0

@@ -5,6 +5,8 @@ created. The linear automaton traverses the linear paths from the
 leaves to the root of the AST and returns a set of nodes for further
 matching. This reduces significantly the number of candidate nodes."""
 
+from __future__ import print_function
+
 __author__ = "George Boutsioukis <gboutsioukis@gmail.com>"
 
 import logging
@@ -147,10 +149,10 @@ class BottomMatcher(object):
         def print_node(node):
             for subnode_key in node.transition_table.keys():
                 subnode = node.transition_table[subnode_key]
-                print("%d -> %d [label=%s] //%s" %
-                      (node.id, subnode.id, type_repr(subnode_key), str(subnode.fixers)))
+                print(("%d -> %d [label=%s] //%s" %
+                      (node.id, subnode.id, type_repr(subnode_key), str(subnode.fixers))))
                 if subnode_key == 1:
-                    print(subnode.content)
+                    print((subnode.content))
                 print_node(subnode)
         print_node(self.root)
         print("}")
