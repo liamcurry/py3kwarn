@@ -20,7 +20,7 @@ See the lib2to3_ documentation for information on warning messages.
 Installation
 ------------
 
-**Requires Python 2.6 or 2.7+**
+**Supports Python 2.6, 2.7, and 3.3+**
 
 ::
 
