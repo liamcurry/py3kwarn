@@ -112,7 +112,7 @@ class BaseFix(object):
         """
         name = template
         while name in self.used_names:
-            name = template + unicode(self.numbers.next())
+            name = template + unicode(next(self.numbers))
         self.used_names.add(name)
         return name
 

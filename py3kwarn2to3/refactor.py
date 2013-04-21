@@ -666,7 +666,7 @@ class RefactoringTool(object):
     def wrap_toks(self, block, lineno, indent):
         """Wraps a tokenize stream to systematically modify start/end."""
         tokens = tokenize.generate_tokens(
-            lambda: next(self.gen_lines(block, indent)))
+            self.gen_lines(block, indent).__next__)
         for type, value, (line0, col0), (line1, col1), line_text in tokens:
             line0 += lineno - 1
             line1 += lineno - 1

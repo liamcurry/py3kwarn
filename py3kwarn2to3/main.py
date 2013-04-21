@@ -92,11 +92,11 @@ class StdoutRefactoringTool(refactor.MultiprocessRefactoringTool):
             if os.path.lexists(backup):
                 try:
                     os.remove(backup)
-                except os.error as err:
+                except os.error:
                     self.log_message("Can't remove backup %s", backup)
             try:
                 os.rename(filename, backup)
-            except os.error as err:
+            except os.error:
                 self.log_message("Can't rename %s to %s", filename, backup)
         # Actually write the new file
         write = super(StdoutRefactoringTool, self).write_file
@@ -262,8 +262,8 @@ def main(fixer_pkg, args=None):
                             options.processes)
             except refactor.MultiprocessingUnsupported:
                 assert options.processes > 1
-                print("Sorry, -j isn't " \
-                    "supported on this platform.", file=sys.stderr)
+                print("Sorry, -j isn't "
+                      "supported on this platform.", file=sys.stderr)
                 return 1
         rt.summarize()
 
