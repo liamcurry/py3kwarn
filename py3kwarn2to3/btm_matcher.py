@@ -149,8 +149,8 @@ class BottomMatcher(object):
         def print_node(node):
             for subnode_key in node.transition_table.keys():
                 subnode = node.transition_table[subnode_key]
-                print(("%d -> %d [label=%s] //%s" %
-                      (node.id, subnode.id, type_repr(subnode_key), str(subnode.fixers))))
+                print("%d -> %d [label=%s] //%s" %
+                      (node.id, subnode.id, type_repr(subnode_key), str(subnode.fixers)))
                 if subnode_key == 1:
                     print((subnode.content))
                 print_node(subnode)
