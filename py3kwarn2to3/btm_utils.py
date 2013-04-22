@@ -4,14 +4,17 @@ from . import pytree
 from .pgen2 import grammar, token
 from .pygram import pattern_symbols, python_symbols
 
+
 syms = pattern_symbols
 pysyms = python_symbols
 tokens = grammar.opmap
 token_labels = token
 
+
 TYPE_ANY = -1
 TYPE_ALTERNATIVES = -2
 TYPE_GROUP = -3
+
 
 class MinNode(object):
     """This class serves as an intermediate representation of the
@@ -101,6 +104,7 @@ class MinNode(object):
         if not self.children:
             yield self
 
+
 def reduce_tree(node, parent=None):
     """
     Internal function. Reduces a compiled pattern tree to an
@@ -115,7 +119,7 @@ def reduce_tree(node, parent=None):
         #skip
         node = node.children[0]
 
-    if node.type == syms.Alternatives  :
+    if node.type == syms.Alternatives:
         #2 cases
         if len(node.children) <= 2:
             #just a single 'Alternative', skip this node
@@ -125,7 +129,7 @@ def reduce_tree(node, parent=None):
             new_node = MinNode(type=TYPE_ALTERNATIVES)
             #skip odd children('|' tokens)
             for child in node.children:
-                if node.children.index(child)%2:
+                if node.children.index(child) % 2:
                     continue
                 reduced = reduce_tree(child, new_node)
                 if reduced is not None:

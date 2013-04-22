@@ -16,14 +16,17 @@ from collections import defaultdict
 from . import pytree
 from .btm_utils import reduce_tree
 
+
 class BMNode(object):
     """Class for a node of the Aho-Corasick automaton used in matching"""
     count = itertools.count()
+
     def __init__(self):
         self.transition_table = {}
         self.fixers = []
         self.id = next(BMNode.count)
         self.content = ''
+
 
 class BottomMatcher(object):
     """The main matcher class. After instantiating the patterns should
@@ -146,6 +149,7 @@ class BottomMatcher(object):
     def print_ac(self):
         "Prints a graphviz diagram of the BM automaton(for debugging)"
         print("digraph g{")
+
         def print_node(node):
             for subnode_key in node.transition_table.keys():
                 subnode = node.transition_table[subnode_key]
@@ -157,8 +161,11 @@ class BottomMatcher(object):
         print_node(self.root)
         print("}")
 
+
 # taken from pytree.py for debugging; only used by print_ac
 _type_reprs = {}
+
+
 def type_repr(type_num):
     global _type_reprs
     if not _type_reprs:
@@ -166,5 +173,6 @@ def type_repr(type_num):
         # printing tokens is possible but not as useful
         # from .pgen2 import token // token.__dict__.items():
         for name, val in python_symbols.__dict__.items():
-            if type(val) == int: _type_reprs[val] = name
+            if type(val) == int:
+                _type_reprs[val] = name
     return _type_reprs.setdefault(type_num, type_num)

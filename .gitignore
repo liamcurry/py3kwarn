@@ -38,3 +38,6 @@ nosetests.xml
 
 #PyCharm
 .idea
+
+# misc
+.DS_Store
