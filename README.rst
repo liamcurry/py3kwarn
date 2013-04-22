@@ -13,7 +13,10 @@ py3kwarn
 py3kwarn is a small wrapper around lib2to3 to help write Python3 compatible
 code. It provides flake8-style warning messages.
 
-See the lib2to3_ documentation for information on warning messages.
+See also:
+
+- The lib2to3_ documentation for information on warning messages.
+- `What's new in Python 3.0`_
 
 *Pull requests are welcome!*
 
@@ -91,6 +94,7 @@ TODO
   Major refactoring may be necessary.
 
 
+.. _What's new in Python 3.0: http://docs.python.org/3/whatsnew/3.0.html
 .. _with syntastic: https://github.com/scrooloose/syntastic/blob/master/syntax_checkers/python/py3kwarn.vim
 .. _A flake8 extension: http://flake8.readthedocs.org/en/latest/extensions.html
 .. _lib2to3: http://docs.python.org/2.6/library/2to3.html#fixers

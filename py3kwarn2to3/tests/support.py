@@ -3,15 +3,15 @@
 
 # Python imports
 import unittest
+import sys
 import os
 import os.path
+import re
 from textwrap import dedent
-
 
 # Local imports
 from py3kwarn2to3 import pytree, refactor
 from py3kwarn2to3.pgen2 import driver
-
 
 test_dir = os.path.dirname(__file__)
 proj_dir = os.path.normpath(os.path.join(test_dir, ".."))
@@ -19,20 +19,16 @@ grammar_path = os.path.join(test_dir, "..", "Grammar.txt")
 grammar = driver.load_grammar(grammar_path)
 driver = driver.Driver(grammar, convert=pytree.convert)
 
-
 def parse_string(string):
     return driver.parse_string(reformat(string), debug=True)
-
 
 def run_all_tests(test_mod=None, tests=None):
     if tests is None:
         tests = unittest.TestLoader().loadTestsFromModule(test_mod)
     unittest.TextTestRunner(verbosity=2).run(tests)
 
-
 def reformat(string):
-    return dedent(string) + "\n\n"
-
+    return dedent(string) + u"\n\n"
 
 def get_refactorer(fixer_pkg="py3kwarn2to3", fixers=None, options=None):
     """
@@ -48,7 +44,6 @@ def get_refactorer(fixer_pkg="py3kwarn2to3", fixers=None, options=None):
         fixers = refactor.get_fixers_from_package(fixer_pkg + ".fixes")
     options = options or {}
     return refactor.RefactoringTool(fixers, options, explicit=True)
-
 
 def all_project_files():
     for dirpath, dirnames, filenames in os.walk(proj_dir):
