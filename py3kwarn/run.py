@@ -32,8 +32,6 @@ class WarnRefactoringTool(refactor.RefactoringTool):
         if from_string == to_string:
             return
 
-        if not hasattr(self, 'warnings'):
-            self.warnings = []
         warning = '%s -> %s' % (from_string, to_string)
         self.warnings.append((node.get_lineno(), '%s:%s:1: PY3K (%s) %s' % (
             filename, node.get_lineno(), fixer_name, warning)))
@@ -140,6 +138,7 @@ def warnings_for_string(data, name):
 def warnings_for_files(filenames):
     if not filenames:
         return []
+    _rt.warnings = []
     _rt.refactor(filenames)
     return sorted(_rt.warnings, key=lambda warning: warning[0])
 

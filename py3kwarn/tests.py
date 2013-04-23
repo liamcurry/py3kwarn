@@ -99,6 +99,9 @@ class TestPy3kWarn(unittest.TestCase):
         run.main([os.path.join(os.path.dirname(__file__),
                                'tests.py')])
 
+    def test_with_nonexistent_file(self):
+        run.main(['nonexistent_file.py'])
+
 
 if __name__ == '__main__':
     unittest.main()

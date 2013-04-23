@@ -347,7 +347,10 @@ class RefactoringTool(object):
 
     def refactor_file(self, filename, write=False, doctests_only=False):
         """Refactors a file."""
-        input, encoding = self._read_python_source(filename)
+        try:
+            input, encoding = self._read_python_source(filename)
+        except IOError:
+            return
         if input is None:
             # Reading the file failed.
             return
