@@ -14,6 +14,13 @@ MAPPING = {"sys":  {"maxint" : "maxsize"},
           }
 LOOKUP = {}
 
+
+try:
+    unicode
+except NameError:
+    unicode = str
+
+
 def alternates(members):
     return "(" + "|".join(map(repr, members)) + ")"
 

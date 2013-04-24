@@ -19,10 +19,15 @@ There should be another fixer that handles at least the following constants:
 
 """
 
-# Local imports
-from ..pgen2 import token
 from .. import fixer_base
 from ..fixer_util import Name
+
+
+try:
+    unicode
+except NameError:
+    unicode = str
+
 
 _TYPE_MAPPING = {
         'BooleanType' : 'bool',

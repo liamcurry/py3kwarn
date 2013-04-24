@@ -12,6 +12,13 @@ from .patcomp import PatternCompiler
 from . import pygram
 from .fixer_util import does_tree_import
 
+
+try:
+    unicode
+except NameError:
+    unicode = str
+
+
 class BaseFix(object):
 
     """Optional base class for fixers.

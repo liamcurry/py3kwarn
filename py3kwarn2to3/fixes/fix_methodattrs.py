@@ -6,6 +6,13 @@
 from .. import fixer_base
 from ..fixer_util import Name
 
+
+try:
+    unicode
+except NameError:
+    unicode = str
+
+
 MAP = {
     "im_func" : "__func__",
     "im_self" : "__self__",
