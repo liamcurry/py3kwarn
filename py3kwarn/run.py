@@ -10,8 +10,14 @@ from py3kwarn2to3 import refactor, pytree
 from py3kwarn2to3.fixer_util import find_root
 
 
+try:
+    unicode
+except NameError:
+    unicode = str
+
+
 def to_warn_str(node):
-    lines = [text.strip() for text in str(node).split('\n')]
+    lines = [text.strip() for text in unicode(node).split('\n')]
     for i, line in enumerate(lines):
         if line:
             if line.startswith('#'):
@@ -130,7 +136,7 @@ def warnings_for_string(data, name):
     data += '\n'  # Silence certain parse errors
     tree = _rt.refactor_string(data, name)
     if tree and tree.was_changed:
-        _rt.processed_file(str(tree), name, data)
+        _rt.processed_file(unicode(tree), name, data)
         return sorted(_rt.warnings, key=lambda warning: warning[0])
     return []
 

@@ -95,9 +95,12 @@ class TestPy3kWarn(unittest.TestCase):
     def test_unicode(self):
         self._test_code('unicode')
 
+    def test_do_not_crash_on_unicode(self):
+        run.warnings_for_string(u'u"å"', '')
+
     def test_main(self):
         run.main([os.path.join(os.path.dirname(__file__),
-                               'tests.py')])
+                               '__init__.py')])
 
     def test_with_nonexistent_file(self):
         run.main(['nonexistent_file.py'])
