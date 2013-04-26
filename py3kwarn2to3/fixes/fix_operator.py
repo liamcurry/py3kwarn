@@ -9,9 +9,17 @@ operator.repeat(obj, n)        -> operator.mul(obj, n)
 operator.irepeat(obj, n)       -> operator.imul(obj, n)
 """
 
-# Local imports
+import sys
+
 from py3kwarn2to3 import fixer_base
 from py3kwarn2to3.fixer_util import Call, Name, String, touch_import
+
+
+def encode_ascii(value):
+    if sys.version_info < (3,):
+        return value.encode("ascii")
+    else:
+        return value
 
 
 def invocation(s):
@@ -85,7 +93,7 @@ class FixOperator(fixer_base.BaseFix):
         return Call(Name(u"isinstance"), args, prefix=node.prefix)
 
     def _check_method(self, node, results):
-        method = getattr(self, "_" + results["method"][0].value.encode("ascii"))
+        method = getattr(self, "_" + encode_ascii(results["method"][0].value))
         if callable(method):
             if "module" in results:
                 return method
