@@ -15,7 +15,11 @@ except:
 
 import tempfile
 import shutil
-import unittest
+
+if sys.version_info < (2, 7):
+    import unittest2 as unittest
+else:
+    import unittest
 
 from py3kwarn2to3 import refactor, pygram, fixer_base
 from py3kwarn2to3.pgen2 import token
@@ -133,7 +137,7 @@ from __future__ import print_function"""
         self.assertEqual(top_fixes, [with_head, no_head])
         name_fixes = d.pop(token.NAME)
         self.assertEqual(name_fixes, [simple, no_head])
-        for fixes in d.itervalues():
+        for fixes in d.values():
             self.assertEqual(fixes, [no_head])
 
     def test_fixer_loading(self):

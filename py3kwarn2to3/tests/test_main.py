@@ -8,11 +8,15 @@ import shutil
 
 try:
     from StringIO import StringIO
-except:
+except ImportError:
     from io import StringIO
 
 import tempfile
-import unittest
+
+if sys.version_info < (2, 7):
+    import unittest2 as unittest
+else:
+    import unittest
 
 from py3kwarn2to3 import main
 
@@ -54,6 +58,7 @@ class TestMain(unittest.TestCase):
             sys.stdout = save_stdout
             sys.stderr = save_stderr
 
+    @unittest.skipIf(sys.version_info[0] > 2, 'Skip on Python 3')
     def test_unencodable_diff(self):
         input_stream = StringIO(u"print 'nothing'\nprint u'über'\n")
         out = StringIO()
