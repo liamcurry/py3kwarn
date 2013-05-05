@@ -1268,25 +1268,6 @@ class Test_dict(FixerTestCase):
             s = "s = %s(d.items())" % wrapper
             self.unchanged(s)
 
-    def test_01(self):
-        b = "d.keys()"
-        a = "list(d.keys())"
-        self.check(b, a)
-
-        b = "a[0].foo().keys()"
-        a = "list(a[0].foo().keys())"
-        self.check(b, a)
-
-    def test_02(self):
-        b = "d.items()"
-        a = "list(d.items())"
-        self.check(b, a)
-
-    def test_03(self):
-        b = "d.values()"
-        a = "list(d.values())"
-        self.check(b, a)
-
     def test_04(self):
         b = "d.iterkeys()"
         a = "iter(d.keys())"
@@ -1310,39 +1291,14 @@ class Test_dict(FixerTestCase):
         s = "sorted(d.keys())"
         self.unchanged(s)
 
-    def test_09(self):
-        b = "iter(d.keys())"
-        a = "iter(list(d.keys()))"
-        self.check(b, a)
-
-    def test_10(self):
-        b = "foo(d.keys())"
-        a = "foo(list(d.keys()))"
-        self.check(b, a)
-
-    def test_11(self):
-        b = "for i in d.keys(): print i"
-        a = "for i in list(d.keys()): print i"
-        self.check(b, a)
-
     def test_12(self):
         b = "for i in d.iterkeys(): print i"
         a = "for i in d.keys(): print i"
         self.check(b, a)
 
-    def test_13(self):
-        b = "[i for i in d.keys()]"
-        a = "[i for i in list(d.keys())]"
-        self.check(b, a)
-
     def test_14(self):
         b = "[i for i in d.iterkeys()]"
         a = "[i for i in d.keys()]"
-        self.check(b, a)
-
-    def test_15(self):
-        b = "(i for i in d.keys())"
-        a = "(i for i in list(d.keys()))"
         self.check(b, a)
 
     def test_16(self):
@@ -1375,19 +1331,9 @@ class Test_dict(FixerTestCase):
         a = "print iter(h.keys()).next()"
         self.check(b, a)
 
-    def test_22(self):
-        b = "print h.keys()[0]"
-        a = "print list(h.keys())[0]"
-        self.check(b, a)
-
     def test_23(self):
         b = "print list(h.iterkeys().next())"
         a = "print list(iter(h.keys()).next())"
-        self.check(b, a)
-
-    def test_24(self):
-        b = "for x in h.keys()[0]: print x"
-        a = "for x in list(h.keys())[0]: print x"
         self.check(b, a)
 
     def test_25(self):
@@ -1405,27 +1351,27 @@ class Test_dict(FixerTestCase):
         a = "d.values()"
         self.check(b, a)
 
-    def test_14(self):
+    def test_28(self):
         b = "[i for i in d.viewkeys()]"
         a = "[i for i in d.keys()]"
         self.check(b, a)
 
-    def test_15(self):
+    def test_29(self):
         b = "(i for i in d.viewkeys())"
         a = "(i for i in d.keys())"
         self.check(b, a)
 
-    def test_17(self):
+    def test_30(self):
         b = "iter(d.viewkeys())"
         a = "iter(d.keys())"
         self.check(b, a)
 
-    def test_18(self):
+    def test_31(self):
         b = "list(d.viewkeys())"
         a = "list(d.keys())"
         self.check(b, a)
 
-    def test_19(self):
+    def test_32(self):
         b = "sorted(d.viewkeys())"
         a = "sorted(d.keys())"
         self.check(b, a)
