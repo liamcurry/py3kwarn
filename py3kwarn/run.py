@@ -40,6 +40,10 @@ class WarnRefactoringTool(refactor.RefactoringTool):
         if from_string == to_string:
             return
 
+        if fixer_name == 'FixPrint':
+            from_string = ''
+            to_string = 'from __future__ import print_function'
+
         warning = '%s -> %s' % (from_string, to_string)
         self.warnings.append((node.get_lineno(), '%s:%s:1: PY3K (%s) %s' % (
             filename, node.get_lineno(), fixer_name, warning)))
