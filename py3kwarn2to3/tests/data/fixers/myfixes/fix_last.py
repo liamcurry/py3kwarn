@@ -1,4 +1,4 @@
-from lib2to3.fixer_base import BaseFix
+from py3kwarn2to3.fixer_base import BaseFix
 
 class FixLast(BaseFix):
 

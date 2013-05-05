@@ -1,5 +1,5 @@
-from lib2to3.fixer_base import BaseFix
-from lib2to3.fixer_util import Name
+from py3kwarn2to3.fixer_base import BaseFix
+from py3kwarn2to3.fixer_util import Name
 
 class FixParrot(BaseFix):
     """
