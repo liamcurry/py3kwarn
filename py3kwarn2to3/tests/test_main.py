@@ -5,7 +5,12 @@ import logging
 import os
 import re
 import shutil
-import StringIO
+
+try:
+    from StringIO import StringIO
+except:
+    from io import StringIO
+
 import tempfile
 import unittest
 
@@ -50,10 +55,10 @@ class TestMain(unittest.TestCase):
             sys.stderr = save_stderr
 
     def test_unencodable_diff(self):
-        input_stream = StringIO.StringIO(u"print 'nothing'\nprint u'über'\n")
-        out = StringIO.StringIO()
+        input_stream = StringIO(u"print 'nothing'\nprint u'über'\n")
+        out = StringIO()
         out_enc = codecs.getwriter("ascii")(out)
-        err = StringIO.StringIO()
+        err = StringIO()
         ret = self.run_2to3_capture(["-"], input_stream, out_enc, err)
         self.assertEqual(ret, 0)
         output = out.getvalue()

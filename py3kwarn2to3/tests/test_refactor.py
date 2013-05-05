@@ -7,17 +7,18 @@ from __future__ import with_statement
 import sys
 import os
 import codecs
-import operator
-import StringIO
+
+try:
+    from StringIO import StringIO
+except:
+    from io import StringIO
+
 import tempfile
 import shutil
 import unittest
-import warnings
 
 from py3kwarn2to3 import refactor, pygram, fixer_base
 from py3kwarn2to3.pgen2 import token
-
-from . import support
 
 
 TEST_DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
@@ -172,7 +173,7 @@ from __future__ import print_function"""
         results = []
         rt = MyRT(_DEFAULT_FIXERS)
         save = sys.stdin
-        sys.stdin = StringIO.StringIO("def parrot(): pass\n\n")
+        sys.stdin = StringIO("def parrot(): pass\n\n")
         try:
             rt.refactor_stdin()
         finally:
