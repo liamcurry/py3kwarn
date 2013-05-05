@@ -10,6 +10,12 @@ from py3kwarn2to3 import pygram, fixer_util
 from py3kwarn2to3.tests import support
 
 
+try:
+    unicode
+except NameError:
+    unicode = str
+
+
 class FixerTestCase(support.TestCase):
 
     # Other test cases can subclass this class and replace "fixer_pkg" with
