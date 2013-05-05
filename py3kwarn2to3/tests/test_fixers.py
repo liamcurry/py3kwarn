@@ -2,12 +2,11 @@
 
 # Python imports
 import os
-import unittest
 from itertools import chain
 from operator import itemgetter
 
 # Local imports
-from py3kwarn2to3 import pygram, pytree, refactor, fixer_util
+from py3kwarn2to3 import pygram, fixer_util
 from py3kwarn2to3.tests import support
 
 
@@ -1204,14 +1203,6 @@ class Test_dict(FixerTestCase):
     fixer = "dict"
 
     def test_prefix_preservation(self):
-        b = "if   d. keys  (  )  : pass"
-        a = "if   list(d. keys  (  ))  : pass"
-        self.check(b, a)
-
-        b = "if   d. items  (  )  : pass"
-        a = "if   list(d. items  (  ))  : pass"
-        self.check(b, a)
-
         b = "if   d. iterkeys  ( )  : pass"
         a = "if   iter(d. keys  ( ))  : pass"
         self.check(b, a)
@@ -1229,14 +1220,6 @@ class Test_dict(FixerTestCase):
         self.check(b, a)
 
     def test_trailing_comment(self):
-        b = "d.keys() # foo"
-        a = "list(d.keys()) # foo"
-        self.check(b, a)
-
-        b = "d.items()  # foo"
-        a = "list(d.items())  # foo"
-        self.check(b, a)
-
         b = "d.iterkeys()  # foo"
         a = "iter(d.keys())  # foo"
         self.check(b, a)
@@ -2695,19 +2678,6 @@ class Test_renames(FixerTestCase):
                 """ % (mod, mod, mod, new)
             self.check(b, a)
 
-    def XXX_test_from_import_usage(self):
-        # not implemented yet
-        for mod, (old, new) in self.modules.items():
-            b = """
-                from %s import %s
-                foo(%s, %s)
-                """ % (mod, old, mod, old)
-            a = """
-                from %s import %s
-                foo(%s, %s)
-                """ % (mod, new, mod, new)
-            self.check(b, a)
-
 class Test_unicode(FixerTestCase):
     fixer = "unicode"
 
@@ -2906,8 +2876,6 @@ class Test_filter(FixerTestCase):
         self.unchanged(a)
         a = """sorted(filter(f, 'abc'), key=blah)[0]"""
         self.unchanged(a)
-        a = """enumerate(filter(f, 'abc'))"""
-        self.unchanged(a)
         a = """enumerate(filter(f, 'abc'), start=1)"""
         self.unchanged(a)
         a = """for i in filter(f, 'abc'): pass"""
@@ -3018,10 +2986,6 @@ class Test_map(FixerTestCase):
         self.unchanged(a)
         a = """sorted(map(f, 'abc'), key=blah)[0]"""
         self.unchanged(a)
-        a = """enumerate(map(f, 'abc'))"""
-        self.unchanged(a)
-        a = """enumerate(map(f, 'abc'), start=1)"""
-        self.unchanged(a)
         a = """for i in map(f, 'abc'): pass"""
         self.unchanged(a)
         a = """[x for x in map(f, 'abc')]"""
@@ -3084,8 +3048,6 @@ class Test_zip(FixerTestCase):
         a = """sorted(zip(a, b), key=blah)"""
         self.unchanged(a)
         a = """sorted(zip(a, b), key=blah)[0]"""
-        self.unchanged(a)
-        a = """enumerate(zip(a, b))"""
         self.unchanged(a)
         a = """enumerate(zip(a, b), start=1)"""
         self.unchanged(a)
