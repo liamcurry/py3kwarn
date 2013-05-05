@@ -1461,27 +1461,6 @@ class Test_xrange(FixerTestCase):
         a = """x = range(0, 10, 2)"""
         self.check(b, a)
 
-    def test_wrap_in_list(self):
-        b = """x = range(10, 3, 9)"""
-        a = """x = list(range(10, 3, 9))"""
-        self.check(b, a)
-
-        b = """x = foo(range(10, 3, 9))"""
-        a = """x = foo(list(range(10, 3, 9)))"""
-        self.check(b, a)
-
-        b = """x = range(10, 3, 9) + [4]"""
-        a = """x = list(range(10, 3, 9)) + [4]"""
-        self.check(b, a)
-
-        b = """x = range(10)[::-1]"""
-        a = """x = list(range(10))[::-1]"""
-        self.check(b, a)
-
-        b = """x = range(10)  [3]"""
-        a = """x = list(range(10))  [3]"""
-        self.check(b, a)
-
     def test_xrange_in_for(self):
         b = """for i in xrange(10):\n    j=i"""
         a = """for i in range(10):\n    j=i"""
@@ -3590,25 +3569,6 @@ class Test_buffer(FixerTestCase):
         b = """buffer(y)[4:5]"""
         a = """memoryview(y)[4:5]"""
         self.check(b, a)
-
-class Test_future(FixerTestCase):
-    fixer = "future"
-
-    def test_future(self):
-        b = """from __future__ import braces"""
-        a = """"""
-        self.check(b, a)
-
-        b = """# comment\nfrom __future__ import braces"""
-        a = """# comment\n"""
-        self.check(b, a)
-
-        b = """from __future__ import braces\n# comment"""
-        a = """\n# comment"""
-        self.check(b, a)
-
-    def test_run_order(self):
-        self.assert_runs_after('print')
 
 class Test_itertools(FixerTestCase):
     fixer = "itertools"
