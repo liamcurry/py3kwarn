@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-import sys
 import codecs
+import io
 import logging
 import os
 import re
 import shutil
+import sys
 
 try:
     from StringIO import StringIO
@@ -58,15 +59,16 @@ class TestMain(unittest.TestCase):
             sys.stdout = save_stdout
             sys.stderr = save_stderr
 
-    @unittest.skipIf(sys.version_info[0] > 2, 'Skip on Python 3')
     def test_unencodable_diff(self):
         input_stream = StringIO(u"print 'nothing'\nprint u'über'\n")
-        out = StringIO()
+        out = io.BytesIO() if sys.version_info[0] > 2 else StringIO()
         out_enc = codecs.getwriter("ascii")(out)
         err = StringIO()
         ret = self.run_2to3_capture(["-"], input_stream, out_enc, err)
         self.assertEqual(ret, 0)
         output = out.getvalue()
+        if sys.version_info[0] > 2:
+            output = output.decode("ascii")
         self.assertTrue("-print 'nothing'" in output)
         self.assertTrue("WARNING: couldn't encode <stdin>'s diff for "
                         "your terminal" in err.getvalue())
