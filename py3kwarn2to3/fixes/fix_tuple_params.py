@@ -24,6 +24,13 @@ from ..pgen2 import token
 from .. import fixer_base
 from ..fixer_util import Assign, Name, Newline, Number, Subscript, syms
 
+
+try:
+    unicode
+except NameError:
+    unicode = str
+
+
 def is_docstring(stmt):
     return isinstance(stmt, pytree.Node) and \
            stmt.children[0].type == token.STRING

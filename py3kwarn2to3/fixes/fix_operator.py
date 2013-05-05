@@ -15,6 +15,12 @@ from py3kwarn2to3 import fixer_base
 from py3kwarn2to3.fixer_util import Call, Name, String, touch_import
 
 
+try:
+    unicode
+except NameError:
+    unicode = str
+
+
 def encode_ascii(value):
     if sys.version_info < (3,):
         return value.encode("ascii")
