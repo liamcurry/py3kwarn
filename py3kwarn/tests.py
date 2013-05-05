@@ -105,6 +105,10 @@ class TestPy3kWarn(unittest.TestCase):
     def test_with_nonexistent_file(self):
         run.main(['nonexistent_file.py'])
 
+    def test_ignore_compatible_unicode(self):
+        self.assertFalse(
+            run.warnings_for_string('unicode = str\nunicode("abc")\n', ''))
+
 
 if __name__ == '__main__':
     unittest.main()
