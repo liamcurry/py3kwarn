@@ -44,9 +44,14 @@ class WarnRefactoringTool(refactor.RefactoringTool):
             from_string = ''
             to_string = 'from __future__ import print_function'
 
-        warning = '%s -> %s' % (from_string, to_string)
-        self.warnings.append((node.get_lineno(), '%s:%s:1: PY3K (%s) %s' % (
-            filename, node.get_lineno(), fixer_name, warning)))
+        warning = '{0} -> {1}'.format(from_string, to_string)
+        self.warnings.append((
+            node.get_lineno(),
+            '{filename}:{line}:1: PY3K ({fixer}) {warning}'.format(
+                filename=filename,
+                line=node.get_lineno(),
+                fixer=fixer_name,
+                warning=warning)))
 
     def refactor_tree(self, tree, name):
         """Refactors a parse tree (modifying the tree in place).
