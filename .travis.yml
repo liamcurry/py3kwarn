@@ -12,6 +12,7 @@ script:
     - python setup.py --quiet test
     - py3kwarn setup.py
     - py3kwarn example.py | grep --quiet 'FixExcept'
+    - if [ "$TRAVIS_PYTHON_VERSION" == "2.7" ]; then nosetests -w py3kwarn2to3/tests; fi
 
 after_success:
     - pip install --quiet --use-mirrors coveralls

@@ -2876,8 +2876,6 @@ class Test_filter(FixerTestCase):
         self.unchanged(a)
         a = """sorted(filter(f, 'abc'), key=blah)[0]"""
         self.unchanged(a)
-        a = """enumerate(filter(f, 'abc'), start=1)"""
-        self.unchanged(a)
         a = """for i in filter(f, 'abc'): pass"""
         self.unchanged(a)
         a = """[x for x in filter(f, 'abc')]"""
@@ -3048,8 +3046,6 @@ class Test_zip(FixerTestCase):
         a = """sorted(zip(a, b), key=blah)"""
         self.unchanged(a)
         a = """sorted(zip(a, b), key=blah)[0]"""
-        self.unchanged(a)
-        a = """enumerate(zip(a, b), start=1)"""
         self.unchanged(a)
         a = """for i in zip(a, b): pass"""
         self.unchanged(a)
