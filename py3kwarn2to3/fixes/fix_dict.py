@@ -44,8 +44,7 @@ class FixDict(fixer_base.BaseFix):
 
     PATTERN = """
     power< head=any+
-         trailer< '.' method=('keys'|'items'|'values'|
-                              'iterkeys'|'iteritems'|'itervalues'|
+         trailer< '.' method=('iterkeys'|'iteritems'|'itervalues'|
                               'viewkeys'|'viewitems'|'viewvalues') >
          parens=trailer< '(' ')' >
          tail=any*
