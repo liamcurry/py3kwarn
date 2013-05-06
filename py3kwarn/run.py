@@ -69,8 +69,6 @@ class WarnRefactoringTool(refactor.RefactoringTool):
             True if the tree was modified, False otherwise.
 
         """
-        self.warnings = []
-
         for fixer in chain(self.pre_order, self.post_order):
             fixer.start_tree(tree, name)
 
@@ -144,6 +142,7 @@ _rt = WarnRefactoringTool(
 
 
 def warnings_for_string(data, name):
+    _rt.warnings = []
     data += '\n'  # Silence certain parse errors
     tree = _rt.refactor_string(data, name)
     if tree and tree.was_changed:
