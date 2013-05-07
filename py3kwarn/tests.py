@@ -4,7 +4,7 @@
 import os
 import unittest
 
-from py3kwarn import run
+from py3kwarn import main
 
 
 code_apply = "apply(hello, args, kwargs)"
@@ -43,7 +43,7 @@ code_unicode = "u'Hello World'"
 class TestPy3kWarn(unittest.TestCase):
 
     def _test_code(self, name, casename=None):
-        warnings = run.warnings_for_string(globals()['code_' + name], name)
+        warnings = main.warnings_for_string(globals()['code_' + name], name)
 
         if not casename:
             casename = 'Fix' + name.title()
@@ -96,18 +96,18 @@ class TestPy3kWarn(unittest.TestCase):
         self._test_code('unicode')
 
     def test_do_not_crash_on_unicode(self):
-        run.warnings_for_string(u'u"å"', '')
+        main.warnings_for_string(u'u"å"', '')
 
     def test_main(self):
-        run.main([os.path.join(os.path.dirname(__file__),
+        main.main([os.path.join(os.path.dirname(__file__),
                                '__init__.py')])
 
     def test_with_nonexistent_file(self):
-        run.main(['nonexistent_file.py'])
+        main.main(['nonexistent_file.py'])
 
     def test_ignore_compatible_unicode(self):
         self.assertFalse(
-            run.warnings_for_string('unicode = str\nunicode("abc")\n', ''))
+            main.warnings_for_string('unicode = str\nunicode("abc")\n', ''))
 
 
 if __name__ == '__main__':
