@@ -31,6 +31,15 @@ def to_warn_str(node):
 
 class WarnRefactoringTool(refactor.RefactoringTool):
 
+    def __init__(self, fixer_names, options=None, explicit=None):
+        super(WarnRefactoringTool, self).__init__(
+            fixer_names, options, explicit)
+
+        self.warnings = []
+
+    def _append_warning(self, warning):
+        self.warnings.append(warning)
+
     def add_to_warnings(self, filename, fixer, node, new):
         fixer_name = fixer.__class__.__name__
 
@@ -45,7 +54,7 @@ class WarnRefactoringTool(refactor.RefactoringTool):
             to_string = 'from __future__ import print_function'
 
         warning = u'{0} -> {1}'.format(from_string, to_string)
-        self.warnings.append((
+        self._append_warning((
             node.get_lineno(),
             u'{filename}:{line}:1: PY3K ({fixer}) {warning}'.format(
                 filename=filename,
@@ -114,7 +123,6 @@ class WarnRefactoringTool(refactor.RefactoringTool):
                             if new is not None:
                                 node.replace(new)
                                 self.add_to_warnings(name, fixer, node, new)
-                                # new.fixers_applied.append(fixer)
                                 for node in new.post_order():
                                     # do not apply the fixer again to
                                     # this or any subnode
@@ -136,27 +144,47 @@ class WarnRefactoringTool(refactor.RefactoringTool):
         return tree.was_changed
 
 
-_rt = WarnRefactoringTool(
-    refactor.get_fixers_from_package(
-        'py3kwarn2to3.fixes'))
-
-
 def warnings_for_string(data, name):
-    _rt.warnings = []
+    tool = WarnRefactoringTool(
+        refactor.get_fixers_from_package(
+            'py3kwarn2to3.fixes'))
     data += '\n'  # Silence certain parse errors
-    tree = _rt.refactor_string(data, name)
+    tree = tool.refactor_string(data, name)
     if tree and tree.was_changed:
-        _rt.processed_file(unicode(tree), name, data)
-        return sorted(_rt.warnings, key=lambda warning: warning[0])
+        tool.processed_file(unicode(tree), name, data)
+        return sorted(tool.warnings, key=lambda warning: warning[0])
     return []
 
 
-def warnings_for_files(filenames):
+class PrintWarnRefactoringTool(WarnRefactoringTool):
+
+    """WarnRefactoringTool that prints to standard out."""
+
+    def _append_warning(self, warning):
+        super(PrintWarnRefactoringTool, self)._append_warning(warning)
+
+        print(warning[1])
+
+    def refactor_tree(self, tree, name):
+        super(PrintWarnRefactoringTool, self).refactor_tree(tree, name)
+
+        sys.stdout.flush()
+
+
+def print_warnings_for_files(filenames):
+    """Print warnings to standard out.
+
+    Return number of warnings.
+
+    """
     if not filenames:
-        return []
-    _rt.warnings = []
-    _rt.refactor(filenames)
-    return sorted(_rt.warnings, key=lambda warning: warning[0])
+        return 0
+
+    tool = PrintWarnRefactoringTool(refactor.get_fixers_from_package(
+        'py3kwarn2to3.fixes'))
+    tool.refactor(filenames)
+
+    return len(tool.warnings)
 
 
 def main(args=None):
@@ -169,9 +197,4 @@ def main(args=None):
         prog='py3kwarn')
     options, args = parser.parse_args(args)
 
-    status = 0
-    for warning in warnings_for_files(args):
-        print(warning[1])
-        status = 2
-
-    return status
+    return 2 if print_warnings_for_files(args) else 0
