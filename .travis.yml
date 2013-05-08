@@ -11,8 +11,9 @@ install:
 
 script:
     - python setup.py --quiet test
-    - py3kwarn setup.py
     - py3kwarn example.py | grep --quiet 'FixExcept'
+    - echo '{}.has_key(3)' | py3kwarn - | grep --quiet 'FixHasKey'
+    - echo '3 in {}' | py3kwarn -
     - nosetests -w py3kwarn2to3/tests
 
 after_success:
