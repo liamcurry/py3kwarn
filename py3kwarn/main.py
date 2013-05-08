@@ -182,7 +182,11 @@ def print_warnings_for_files(filenames):
 
     tool = PrintWarnRefactoringTool(refactor.get_fixers_from_package(
         'py3kwarn2to3.fixes'))
-    tool.refactor(filenames)
+
+    if filenames == ['-']:
+        tool.refactor_stdin()
+    else:
+        tool.refactor(filenames)
 
     return len(tool.warnings)
 
