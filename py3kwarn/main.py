@@ -28,7 +28,7 @@ def to_warn_str(node):
     return ''.join(lines).strip()
 
 
-class WarnRefactoringTool(refactor.RefactoringTool):
+class WarnRefactoringTool(refactor.MultiprocessRefactoringTool):
 
     def __init__(self, fixer_names, options=None, explicit=None):
         super(WarnRefactoringTool, self).__init__(
@@ -170,7 +170,7 @@ class PrintWarnRefactoringTool(WarnRefactoringTool):
         sys.stdout.flush()
 
 
-def print_warnings_for_files(filenames):
+def print_warnings_for_files(filenames, num_processes=1):
     """Print warnings to standard out.
 
     Return number of warnings.
@@ -185,7 +185,13 @@ def print_warnings_for_files(filenames):
     if filenames == ['-']:
         tool.refactor_stdin()
     else:
-        tool.refactor(filenames)
+        try:
+            tool.refactor(filenames,
+                          num_processes=num_processes)
+        except refactor.MultiprocessingUnsupported:
+            assert num_processes > 1
+            print("Sorry, -j isn't supported on this platform.",
+                  file=sys.stderr)
 
     return len(tool.warnings)
 
@@ -195,9 +201,14 @@ def main(args=None):
         args = sys.argv[1:]
 
     import optparse
-    parser = optparse.OptionParser(
-        version='%prog {0}'.format(__version__),
-        prog='py3kwarn')
+    parser = optparse.OptionParser(version='%prog {0}'.format(__version__),
+                                   prog='py3kwarn')
+    parser.add_option('-j', '--jobs', action='store', default=1,
+                      type='int', help='Run in parallel')
     options, args = parser.parse_args(args)
 
-    return 2 if print_warnings_for_files(args) else 0
+    if options.jobs < 1:
+        parser.error('--jobs must be greater than zero')
+
+    return 2 if print_warnings_for_files(args,
+                                         num_processes=options.jobs) else 0
