@@ -185,13 +185,8 @@ def print_warnings_for_files(filenames, num_processes=1):
     if filenames == ['-']:
         tool.refactor_stdin()
     else:
-        try:
-            tool.refactor(filenames,
-                          num_processes=num_processes)
-        except refactor.MultiprocessingUnsupported:
-            assert num_processes > 1
-            print("Sorry, -j isn't supported on this platform.",
-                  file=sys.stderr)
+        tool.refactor(filenames,
+                      num_processes=num_processes)
 
     return len(tool.warnings)
 
@@ -208,7 +203,13 @@ def main(args=None):
     options, args = parser.parse_args(args)
 
     if options.jobs < 1:
-        parser.error('--jobs must be greater than zero')
+        try:
+            import multiprocessing
+        except ImportError:
+            print('"--jobs" is not supported on this platform',
+                  file=sys.stderr)
+            return 1
+        options.jobs = multiprocessing.cpu_count()
 
     return 2 if print_warnings_for_files(args,
                                          num_processes=options.jobs) else 0
