@@ -118,8 +118,12 @@ class WarnRefactoringTool(refactor.MultiprocessRefactoringTool):
                         results = fixer.match(node)
 
                         if results:
+                            original_node = node.clone()
                             new = fixer.transform(node, results)
-                            if new is not None:
+                            if new is None:
+                                self.add_to_warnings(name, fixer,
+                                                     original_node, node)
+                            else:
                                 node.replace(new)
                                 self.add_to_warnings(name, fixer, node, new)
                                 for node in new.post_order():
