@@ -120,12 +120,8 @@ class WarnRefactoringTool(refactor.MultiprocessRefactoringTool):
                         if results:
                             original_node = node.clone()
                             new = fixer.transform(node, results)
-                            if new is None:
-                                self.add_to_warnings(name, fixer,
-                                                     original_node, node)
-                            else:
+                            if new is not None:
                                 node.replace(new)
-                                self.add_to_warnings(name, fixer, node, new)
                                 for node in new.post_order():
                                     # do not apply the fixer again to
                                     # this or any subnode
@@ -141,6 +137,11 @@ class WarnRefactoringTool(refactor.MultiprocessRefactoringTool):
                                         match_set[fxr] = []
 
                                     match_set[fxr].extend(new_matches[fxr])
+
+                            self.add_to_warnings(name,
+                                                 fixer,
+                                                 original_node,
+                                                 new or node)
 
         for fixer in chain(self.pre_order, self.post_order):
             fixer.finish_tree(tree, name)
