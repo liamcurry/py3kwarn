@@ -45,9 +45,6 @@ class WarnRefactoringTool(refactor.MultiprocessRefactoringTool):
         from_string = to_warn_str(node)
         to_string = to_warn_str(new)
 
-        if from_string == to_string:
-            return
-
         if fixer_name == 'FixPrint':
             from_string = ''
             to_string = 'from __future__ import print_function'
@@ -138,10 +135,12 @@ class WarnRefactoringTool(refactor.MultiprocessRefactoringTool):
 
                                     match_set[fxr].extend(new_matches[fxr])
 
-                            self.add_to_warnings(name,
-                                                 fixer,
-                                                 original_node,
-                                                 new or node)
+                            new = new or node
+                            if new != original_node:
+                                self.add_to_warnings(name,
+                                                     fixer,
+                                                     original_node,
+                                                     new)
 
         for fixer in chain(self.pre_order, self.post_order):
             fixer.finish_tree(tree, name)
