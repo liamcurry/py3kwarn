@@ -117,6 +117,10 @@ class TestPy3kWarn(unittest.TestCase):
         self.assertTrue(
             main.warnings_for_string('xrange(3)\n', ''))
 
+    def test_print(self):
+        self.assertTrue(
+            main.warnings_for_string('print 3\n', ''))
+
 
 if __name__ == '__main__':
     unittest.main()
