@@ -113,6 +113,10 @@ class TestPy3kWarn(unittest.TestCase):
         self.assertFalse(
             main.warnings_for_string('basestring = str\nbasestring\n', ''))
 
+    def test_xrange(self):
+        self.assertTrue(
+            main.warnings_for_string('xrange(3)\n', ''))
+
 
 if __name__ == '__main__':
     unittest.main()
