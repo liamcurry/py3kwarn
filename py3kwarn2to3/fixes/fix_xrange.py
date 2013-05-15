@@ -9,19 +9,13 @@ from ..fixer_util import Name
 
 
 class FixXrange(fixer_base.BaseFix):
+
     BM_compatible = True
     PATTERN = """
               power<
                  (name='xrange') trailer< '(' args=any ')' >
               rest=any* >
               """
-
-    def start_tree(self, tree, filename):
-        super(FixXrange, self).start_tree(tree, filename)
-        self.transformed_xranges = set()
-
-    def finish_tree(self, tree, filename):
-        self.transformed_xranges = None
 
     def transform(self, node, results):
         name = results["name"]
