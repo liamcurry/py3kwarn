@@ -120,7 +120,3 @@ class TestPy3kWarn(unittest.TestCase):
     def test_print(self):
         self.assertTrue(
             main.warnings_for_string('print 3\n', ''))
-
-
-if __name__ == '__main__':
-    unittest.main()
