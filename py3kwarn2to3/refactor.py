@@ -26,7 +26,7 @@ except ImportError:
 from itertools import chain
 
 # Local imports
-from .pgen2 import driver, tokenize, token
+from .pgen2 import driver, parse, tokenize, token
 from .fixer_util import find_root
 from . import pytree, pygram
 from . import btm_matcher as bm
@@ -324,7 +324,10 @@ class RefactoringTool(object):
                 if (not name.startswith(".") and
                     os.path.splitext(name)[1] == py_ext):
                     fullname = os.path.join(dirpath, name)
-                    self.refactor_file(fullname, write, doctests_only)
+                    try:
+                        self.refactor_file(fullname, write, doctests_only)
+                    except parse.ParseError:
+                        pass
             # Modify dirnames in-place to remove subdirs with leading dots
             dirnames[:] = [dn for dn in dirnames if not dn.startswith(".")]
 
