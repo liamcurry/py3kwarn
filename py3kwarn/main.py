@@ -210,9 +210,7 @@ def main(args=None):
         try:
             import multiprocessing
         except ImportError:
-            print('"--jobs" is not supported on this platform',
-                  file=sys.stderr)
-            return 1
+            parser.error('"--jobs" is not supported on this platform')
         options.jobs = multiprocessing.cpu_count()
 
     return 2 if print_warnings_for_files(args,
