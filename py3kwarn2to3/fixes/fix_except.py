@@ -45,8 +45,6 @@ class FixExcept(fixer_base.BaseFix):
     """
 
     def transform(self, node, results):
-        syms = self.syms
-
         tail = [n.clone() for n in results["tail"]]
 
         try_cleanup = [ch.clone() for ch in results["cleanup"]]
