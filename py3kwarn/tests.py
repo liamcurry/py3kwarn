@@ -33,10 +33,7 @@ test.func_closure
 test.func_dict
 """
 code_has_key = "d.has_key('foobar')"
-code_imports = """
-import StringIO
-import dbm
-"""
+
 code_unicode = "u'Hello World'"
 
 
@@ -88,10 +85,6 @@ class TestPy3kWarn(unittest.TestCase):
     def test_has_key(self):
         self._test_code('has_key', 'HasKey')
 
-    def test_imports(self):
-        #self._test_code('imports')
-        pass
-
     def test_unicode(self):
         self._test_code('unicode')
 
@@ -120,3 +113,30 @@ class TestPy3kWarn(unittest.TestCase):
     def test_print(self):
         self.assertTrue(
             main.warnings_for_string('print 3\n', ''))
+
+    def test_imports(self):
+        self.assertTrue(
+            main.warnings_for_string(
+                """\
+from ConfigParser import RawConfigParser
+""", ''))
+
+    def test_imports_with_import_error_caught(self):
+        self.assertFalse(
+            main.warnings_for_string(
+                """\
+try:
+    from ConfigParser import RawConfigParser
+except ImportError:
+    from configparser import RawConfigParser
+""", ''))
+
+    def test_imports_with_import_error_caught_the_other_way(self):
+        self.assertFalse(
+            main.warnings_for_string(
+                """\
+try:
+    from configparser import RawConfigParser
+except ImportError:
+    from ConfigParser import RawConfigParser
+""", ''))

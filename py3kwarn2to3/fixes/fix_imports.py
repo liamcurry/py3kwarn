@@ -3,7 +3,7 @@
 
 # Local imports
 from .. import fixer_base
-from ..fixer_util import Name, attr_chain
+from ..fixer_util import Name, attr_chain, does_tree_import
 
 
 try:
@@ -131,6 +131,11 @@ class FixImports(fixer_base.BaseFix):
         if import_mod:
             mod_name = import_mod.value
             new_name = unicode(self.mapping[mod_name])
+            if does_tree_import(
+                    package=new_name,
+                    name=unicode(results['node'].children[-1]).strip(),
+                    node=node):
+                return
             import_mod.replace(Name(new_name, prefix=import_mod.prefix))
             if "name_import" in results:
                 # If it's not a "from x import x, y" or "import x as y" import,
