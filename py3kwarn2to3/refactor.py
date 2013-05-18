@@ -389,9 +389,7 @@ class RefactoringTool(object):
             self.driver.grammar = pygram.python_grammar_no_print_statement
         try:
             tree = self.driver.parse_string(data)
-        except Exception as err:
-            self.log_error("Can't parse %s: %s: %s",
-                           name, err.__class__.__name__, err)
+        except parse.ParseError:
             return
         finally:
             self.driver.grammar = self.grammar
