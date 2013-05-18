@@ -114,6 +114,10 @@ class TestPy3kWarn(unittest.TestCase):
         self.assertTrue(
             main.warnings_for_string('print 3\n', ''))
 
+    def test_print_with_parentheses(self):
+        self.assertFalse(
+            main.warnings_for_string('print("%d" % 3)\n', ''))
+
     def test_imports(self):
         self.assertTrue(
             main.warnings_for_string(
