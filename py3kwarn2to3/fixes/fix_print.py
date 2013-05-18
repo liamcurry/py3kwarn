@@ -22,8 +22,8 @@ from ..fixer_util import Name, Call, Comma, String
 
 
 parend_expr = patcomp.compile_pattern(
-              """atom< '(' [atom|term|STRING|NAME] ')' >"""
-              )
+      """atom< '(' [arith_expr|atom|power|term|STRING|NAME] ')' >"""
+)
 
 
 class FixPrint(fixer_base.BaseFix):

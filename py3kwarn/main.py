@@ -45,10 +45,6 @@ class WarnRefactoringTool(refactor.MultiprocessRefactoringTool):
         from_string = to_warn_str(node)
         to_string = to_warn_str(new)
 
-        if fixer_name == 'FixPrint':
-            from_string = ''
-            to_string = 'from __future__ import print_function'
-
         warning = u'{0} -> {1}'.format(from_string, to_string)
         self._append_warning((
             node.get_lineno(),
