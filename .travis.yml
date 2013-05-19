@@ -15,6 +15,7 @@ script:
     - echo '{}.has_key(3)' | py3kwarn - | grep --quiet 'FixHasKey'
     - echo '3 in {}' | py3kwarn -
     - nosetests -w py3kwarn2to3/tests
+    - echo '{}.has_key(3)' | py3kwarn2to3 -
 
 after_success:
     - pip install --quiet --use-mirrors coveralls
