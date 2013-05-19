@@ -8,7 +8,7 @@ from .. import fixer_base
 from ..fixer_util import find_binding
 
 _mapping = {u"unichr" : u"chr", u"unicode" : u"str"}
-_literal_re = re.compile(r"[uU][rR]?[\'\"]")
+_literal_re = re.compile(r"[uU][rR][\'\"]")
 
 class FixUnicode(fixer_base.BaseFix):
     BM_compatible = True

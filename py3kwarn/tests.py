@@ -34,7 +34,7 @@ test.func_dict
 """
 code_has_key = "d.has_key('foobar')"
 
-code_unicode = "u'Hello World'"
+code_unicode = "ur'Hello World'"
 
 
 class TestPy3kWarn(unittest.TestCase):
