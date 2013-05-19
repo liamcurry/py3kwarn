@@ -16,7 +16,8 @@ class FixUnicode(fixer_base.BaseFix):
 
     def start_tree(self, tree, filename):
         super(FixUnicode, self).start_tree(tree, filename)
-        self.skip = find_binding('unicode', tree)
+        self.skip = (find_binding('unicode', tree) or
+                     find_binding('unichr', tree))
 
     def transform(self, node, results):
         if self.skip:

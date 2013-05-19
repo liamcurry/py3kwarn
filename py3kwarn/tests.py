@@ -101,6 +101,14 @@ class TestPy3kWarn(unittest.TestCase):
         self.assertFalse(
             main.warnings_for_string('unicode = str\nunicode("abc")\n'))
 
+    def test_unichr(self):
+        self.assertTrue(
+            main.warnings_for_string('unichr(1)\n'))
+
+    def test_ignore_compatible_unichr(self):
+        self.assertFalse(
+            main.warnings_for_string('unichr = chr\nunichr(1)\n'))
+
     def test_ignore_compatible_basestring(self):
         self.assertFalse(
             main.warnings_for_string('basestring = str\nbasestring\n'))
