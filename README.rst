@@ -60,17 +60,24 @@ Usage from the command line
     example.py:44:1: PY3K (FixHasKey) d.has_key('foobar') -> 'foobar' in d
     example.py:56:1: PY3K (FixInput) input('FixInput') -> eval(input('FixInput'))
     example.py:59:1: PY3K (FixIntern) intern(s) -> sys.intern(s)
-    example.py:66:1: PY3K (FixItertoolsImports) from itertools import -> 
-    example.py:67:1: PY3K (FixItertoolsImports) from itertools import; -> 
-    example.py:68:1: PY3K (FixItertoolsImports) from itertools import; -> 
+    example.py:66:1: PY3K (FixItertoolsImports) from itertools import ->
+    example.py:67:1: PY3K (FixItertoolsImports) from itertools import; ->
+    example.py:68:1: PY3K (FixItertoolsImports) from itertools import; ->
     example.py:72:1: PY3K (FixUnicode) u'Hello World' -> 'Hello World'
+
+Modifying code automatically
+----------------------------
+
+Problems can be fixed via ``py3kwarn2to3``::
+
+    $ py3kwarn2to3 --write example.py
 
 Testing
 -------
 
-Testing can be done with ``make test``. py3kwarn also supports `tox`_, which
-assumes `pythonbrew`_ is installed. This enables quickly testing changes in
-many versions of python. Take a look at the ``tox.ini`` file for more details.
+Testing can be done with ``make test``. py3kwarn also supports `tox`_. This
+enables quickly testing changes in many versions of python. Take a look at the
+``tox.ini`` file for more details.
 
 Contributing
 ------------
@@ -101,4 +108,3 @@ TODO
 .. _A flake8 extension: http://flake8.readthedocs.org/en/latest/extensions.html
 .. _lib2to3: http://docs.python.org/2.6/library/2to3.html#fixers
 .. _tox: http://tox.readthedocs.org/en/latest/
-.. _pythonbrew: https://github.com/utahta/pythonbrew
