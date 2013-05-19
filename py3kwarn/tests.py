@@ -151,3 +151,11 @@ except ImportError:
     def test_ignore_compatible_long(self):
         self.assertFalse(
             main.warnings_for_string('long = int\nlong\n'))
+
+    def test_zip(self):
+        self.assertTrue(
+            main.warnings_for_string('zip([1, 2], [3, 4])\n'))
+
+    def test_ignore_compatible_zip(self):
+        self.assertFalse(
+            main.warnings_for_string('enumerate(zip([1, 2], [3, 4]))\n'))

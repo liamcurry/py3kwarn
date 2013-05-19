@@ -198,7 +198,7 @@ p0 = """for_stmt< 'for' any 'in' node=any ':' any* >
 p1 = """
 power<
     ( 'iter' | 'list' | 'tuple' | 'sorted' | 'set' | 'sum' |
-      'any' | 'all' | (any* trailer< '.' 'join' >) )
+      'any' | 'all' | 'enumerate' | (any* trailer< '.' 'join' >) )
     trailer< '(' node=any ')' >
     any*
 >
