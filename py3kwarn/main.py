@@ -143,7 +143,7 @@ class WarnRefactoringTool(refactor.MultiprocessRefactoringTool):
         return tree.was_changed
 
 
-def warnings_for_string(data, name):
+def warnings_for_string(data, name=''):
     tool = WarnRefactoringTool(
         refactor.get_fixers_from_package(
             'py3kwarn2to3.fixes'))

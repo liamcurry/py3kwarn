@@ -88,7 +88,7 @@ class TestPy3kWarn(unittest.TestCase):
         self._test_code('unicode')
 
     def test_do_not_crash_on_unicode(self):
-        main.warnings_for_string(u'u"å"', '')
+        main.warnings_for_string(u'u"å"')
 
     def test_main(self):
         main.main([os.path.join(os.path.dirname(__file__),
@@ -99,30 +99,30 @@ class TestPy3kWarn(unittest.TestCase):
 
     def test_ignore_compatible_unicode(self):
         self.assertFalse(
-            main.warnings_for_string('unicode = str\nunicode("abc")\n', ''))
+            main.warnings_for_string('unicode = str\nunicode("abc")\n'))
 
     def test_ignore_compatible_basestring(self):
         self.assertFalse(
-            main.warnings_for_string('basestring = str\nbasestring\n', ''))
+            main.warnings_for_string('basestring = str\nbasestring\n'))
 
     def test_xrange(self):
         self.assertTrue(
-            main.warnings_for_string('xrange(3)\n', ''))
+            main.warnings_for_string('xrange(3)\n'))
 
     def test_print(self):
         self.assertTrue(
-            main.warnings_for_string('print 3\n', ''))
+            main.warnings_for_string('print 3\n'))
 
     def test_print_with_parentheses(self):
         self.assertFalse(
-            main.warnings_for_string('print("%d" % 3)\n', ''))
+            main.warnings_for_string('print("%d" % 3)\n'))
 
     def test_imports(self):
         self.assertTrue(
             main.warnings_for_string(
                 """\
 from ConfigParser import RawConfigParser
-""", ''))
+"""))
 
     def test_imports_with_import_error_caught(self):
         self.assertFalse(
@@ -132,7 +132,7 @@ try:
     from ConfigParser import RawConfigParser
 except ImportError:
     from configparser import RawConfigParser
-""", ''))
+"""))
 
     def test_imports_with_import_error_caught_the_other_way(self):
         self.assertFalse(
@@ -142,12 +142,12 @@ try:
     from configparser import RawConfigParser
 except ImportError:
     from ConfigParser import RawConfigParser
-""", ''))
+"""))
 
     def test_long(self):
         self.assertTrue(
-            main.warnings_for_string('long\n', ''))
+            main.warnings_for_string('long\n'))
 
     def test_ignore_compatible_long(self):
         self.assertFalse(
-            main.warnings_for_string('long = int\nlong\n', ''))
+            main.warnings_for_string('long = int\nlong\n'))
