@@ -22,7 +22,12 @@ except ImportError:
 try:
     unicode
 except NameError:
-    unicode = basestring = str
+    unicode = str
+
+try:
+    basestring
+except NameError:
+    basestring = str
 
 
 HUGE = 0x7FFFFFFF  # maximum repeat count, default max
