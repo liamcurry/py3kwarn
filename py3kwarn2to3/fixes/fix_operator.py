@@ -9,6 +9,7 @@ operator.repeat(obj, n)        -> operator.mul(obj, n)
 operator.irepeat(obj, n)       -> operator.imul(obj, n)
 """
 
+import collections
 import sys
 
 from py3kwarn2to3 import fixer_base
@@ -100,7 +101,7 @@ class FixOperator(fixer_base.BaseFix):
 
     def _check_method(self, node, results):
         method = getattr(self, "_" + encode_ascii(results["method"][0].value))
-        if callable(method):
+        if isinstance(method, collections.Callable):
             if "module" in results:
                 return method
             else:
