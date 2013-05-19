@@ -7,8 +7,8 @@ import unittest
 from py3kwarn import main
 
 
-code_apply = "apply(hello, args, kwargs)"
-code_basestring = "basestring"
+code_apply = 'apply(hello, args, kwargs)'
+code_basestring = 'basestring'
 code_buffer = "buffer('hello', 1, 3)"
 code_callable = "callable('hello')"
 code_dict = """
@@ -22,9 +22,9 @@ try:
 except E, T:
     pass
 """
-code_exec = "exec code in ns1, ns2"
+code_exec = 'exec code in ns1, ns2'
 code_execfile = "execfile('test.py')"
-code_filter = "filter(lambda x: x, [1, 2, 3])"
+code_filter = 'filter(lambda x: x, [1, 2, 3])'
 code_funcattrs = """
 def test():
     pass
@@ -79,8 +79,7 @@ class TestPy3kWarn(unittest.TestCase):
         self._test_code('filter')
 
     def test_funcattrs(self):
-        #self._test_code('funcattrs')
-        pass
+        self._test_code('funcattrs')
 
     def test_has_key(self):
         self._test_code('has_key', 'HasKey')
@@ -93,7 +92,7 @@ class TestPy3kWarn(unittest.TestCase):
 
     def test_main(self):
         main.main([os.path.join(os.path.dirname(__file__),
-                               '__init__.py')])
+                                '__init__.py')])
 
     def test_with_nonexistent_file(self):
         main.main(['nonexistent_file.py'])
