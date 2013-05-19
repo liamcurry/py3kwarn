@@ -133,7 +133,7 @@ def warn(msg):
     print("WARNING: %s" % (msg,), file=sys.stderr)
 
 
-def main(fixer_pkg, args=None):
+def main(fixer_pkg='py3kwarn2to3.fixes', args=None):
     """Main program.
 
     Args:
@@ -142,6 +142,7 @@ def main(fixer_pkg, args=None):
               sys.argv[1:] is used.
 
     Returns a suggested exit status (0, 1, 2).
+
     """
     # Set up option parser
     parser = optparse.OptionParser(usage="2to3 [options] file|dir ...")

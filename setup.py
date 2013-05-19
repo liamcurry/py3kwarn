@@ -30,7 +30,9 @@ setup(name=APP_NAME,
       ],
       package_data={'py3kwarn2to3': ['*.txt']},
       zip_safe=False,
-      entry_points={'console_scripts': ['py3kwarn=py3kwarn.main:main']},
+      entry_points={
+          'console_scripts': ['py3kwarn=py3kwarn.main:main',
+                              'py3kwarn2to3=py3kwarn2to3.main:main']},
       long_description=open('README.rst').read(),
       classifiers=[
           'Environment :: Console',
