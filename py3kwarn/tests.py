@@ -144,3 +144,11 @@ try:
 except ImportError:
     from ConfigParser import RawConfigParser
 """, ''))
+
+    def test_long(self):
+        self.assertTrue(
+            main.warnings_for_string('long\n', ''))
+
+    def test_ignore_compatible_long(self):
+        self.assertFalse(
+            main.warnings_for_string('long = int\nlong\n', ''))
