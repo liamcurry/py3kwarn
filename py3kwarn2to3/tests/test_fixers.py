@@ -2696,23 +2696,9 @@ class Test_unicode(FixerTestCase):
         a = """ str(x )"""
         self.check(b, a)
 
-        b = """ u'h'"""
-        a = """ 'h'"""
-        self.check(b, a)
-
     def test_unicode_call(self):
         b = """unicode(x, y, z)"""
         a = """str(x, y, z)"""
-        self.check(b, a)
-
-    def test_unichr(self):
-        b = """unichr(u'h')"""
-        a = """chr('h')"""
-        self.check(b, a)
-
-    def test_unicode_literal_1(self):
-        b = '''u"x"'''
-        a = '''"x"'''
         self.check(b, a)
 
     def test_unicode_literal_2(self):
