@@ -27,9 +27,11 @@ each time a new token is found."""
 
 from __future__ import print_function
 
-__author__ = 'Ka-Ping Yee <ping@lfw.org>'
-__credits__ = \
-    'GvR, ESR, Tim Peters, Thomas Wouters, Fred Drake, Skip Montanaro'
+try:
+    # Python 2.
+    from future_builtins import map
+except ImportError:
+    pass
 
 import string, re
 from codecs import BOM_UTF8, lookup
@@ -39,6 +41,10 @@ from . import token
 __all__ = [x for x in dir(token) if x[0] != '_'] + ["tokenize",
            "generate_tokens", "untokenize"]
 del token
+
+__author__ = 'Ka-Ping Yee <ping@lfw.org>'
+__credits__ = \
+    'GvR, ESR, Tim Peters, Thomas Wouters, Fred Drake, Skip Montanaro'
 
 try:
     bytes

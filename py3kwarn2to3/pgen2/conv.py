@@ -28,10 +28,14 @@ without having to invoke the Python pgen C program.
 
 from __future__ import print_function
 
-# Python imports
+try:
+    # Python 2.
+    from future_builtins import map
+except ImportError:
+    pass
+
 import re
 
-# Local imports
 from pgen2 import grammar, token
 
 
