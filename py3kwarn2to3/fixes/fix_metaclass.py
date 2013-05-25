@@ -19,7 +19,7 @@
 
 # Local imports
 from .. import fixer_base
-from ..pygram import token
+from ..pgen2 import token
 from ..fixer_util import syms
 from ..fixer_util import Node
 from ..fixer_util import Leaf
