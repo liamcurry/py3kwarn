@@ -95,7 +95,6 @@ TODO
 
 - Friendlier messages.
 - `A flake8 extension`_.
-- Use argparse to add smarter options.
 - Flags to ignore certain errors
 - Compatibility mode, where warning messages provide suggestions to write
   forwards compatible code. Make this the default.
