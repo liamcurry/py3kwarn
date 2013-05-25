@@ -10,8 +10,8 @@ py3kwarn
     :target: https://coveralls.io/r/liamcurry/py3kwarn
     :alt: Test coverage status
 
-py3kwarn is a small wrapper around lib2to3 to help write Python3 compatible
-code. It provides flake8-style warning messages.
+py3kwarn detects code that is not Python 3 compatible. It provides
+flake8-style warning messages.
 
 See also:
 

@@ -16,8 +16,7 @@ with open('py3kwarn/__init__.py') as f:
 
 setup(name=APP_NAME,
       version=VERSION,
-      description='A small wrapper around lib2to3 to help write Python 3 '
-                  'compatible code.',
+      description='Detects code that is not Python 3 compatible.',
       author='Liam Curry',
       author_email='liam@curry.name',
       url='https://github.com/liamcurry/py3kwarn',
