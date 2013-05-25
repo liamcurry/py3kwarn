@@ -1,5 +1,6 @@
-#! /usr/bin/env python
 # coding=utf-8
+
+from __future__ import unicode_literals
 
 import os
 import unittest
@@ -88,7 +89,7 @@ class TestPy3kWarn(unittest.TestCase):
         self._test_code('unicode')
 
     def test_do_not_crash_on_unicode(self):
-        main.warnings_for_string(u'u"å"')
+        main.warnings_for_string('u"å"')
 
     def test_main(self):
         main.main([os.path.join(os.path.dirname(__file__),

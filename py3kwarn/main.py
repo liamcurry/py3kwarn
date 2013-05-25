@@ -1,6 +1,7 @@
 # coding=utf-8
 
 from __future__ import print_function
+from __future__ import unicode_literals
 
 from itertools import chain
 import sys
@@ -45,10 +46,10 @@ class WarnRefactoringTool(refactor.MultiprocessRefactoringTool):
         from_string = to_warn_str(node)
         to_string = to_warn_str(new)
 
-        warning = u'{0} -> {1}'.format(from_string, to_string)
+        warning = '{0} -> {1}'.format(from_string, to_string)
         self._append_warning((
             node.get_lineno(),
-            u'{filename}:{line}:1: PY3K ({fixer}) {warning}'.format(
+            '{filename}:{line}:1: PY3K ({fixer}) {warning}'.format(
                 filename=filename,
                 line=node.get_lineno(),
                 fixer=fixer_name,
