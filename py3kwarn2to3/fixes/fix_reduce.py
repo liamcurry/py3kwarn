@@ -11,7 +11,6 @@ from py3kwarn2to3 import fixer_base
 from py3kwarn2to3.fixer_util import touch_import
 
 
-
 class FixReduce(fixer_base.BaseFix):
 
     BM_compatible = True

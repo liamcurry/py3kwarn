@@ -18,7 +18,7 @@ from __future__ import print_function
 import pickle
 
 # Local imports
-from . import token, tokenize
+from . import token
 
 
 class Grammar(object):

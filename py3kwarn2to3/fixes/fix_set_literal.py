@@ -8,7 +8,6 @@ from py3kwarn2to3 import fixer_base, pytree
 from py3kwarn2to3.fixer_util import token, syms
 
 
-
 class FixSetLiteral(fixer_base.BaseFix):
 
     BM_compatible = True

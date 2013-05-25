@@ -30,9 +30,10 @@ as an argument to a function that introspects the argument).
 # Local imports
 from .. import pytree
 from .. import patcomp
-from ..pgen2 import token
 from .. import fixer_base
-from ..fixer_util import Name, Call, LParen, RParen, ArgList, Dot
+from ..fixer_util import Name
+from ..fixer_util import Call
+from ..fixer_util import Dot
 from .. import fixer_util
 
 

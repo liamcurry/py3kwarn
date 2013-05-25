@@ -217,7 +217,6 @@ class RefactoringTool(object):
                                     logger=self.logger)
         self.pre_order, self.post_order = self.get_fixers()
 
-
         self.files = []  # List of files that were or should be modified
 
         self.BM = bm.BottomMatcher()
@@ -236,8 +235,6 @@ class RefactoringTool(object):
 
         self.bmi_pre_order_heads = _get_headnode_dict(self.bmi_pre_order)
         self.bmi_post_order_heads = _get_headnode_dict(self.bmi_post_order)
-
-
 
     def get_fixers(self):
         """Inspects the options to load the requested patterns and handlers.
@@ -297,7 +294,6 @@ class RefactoringTool(object):
     def print_output(self, old_text, new_text, filename, equal):
         """Called with the old version, new version, and filename of a
         refactored file."""
-        pass
 
     def refactor(self, items, write=False, doctests_only=False):
         """Refactor a list of files and directories."""
@@ -682,7 +678,6 @@ class RefactoringTool(object):
             # that the column numbers for doctests are relative to the
             # end of the prompt string (PS1 or PS2).
             yield type, value, (line0, col0), (line1, col1), line_text
-
 
     def gen_lines(self, block, indent):
         """Generates lines as expected by tokenize from a list of lines.
