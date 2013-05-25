@@ -11,12 +11,12 @@ install:
 
 script:
     - python setup.py --quiet test
+    - nosetests -w py3kwarn2to3/tests
 
     # Run smoke tests.
     - py3kwarn example.py | grep --quiet 'FixExcept'
     - echo '{}.has_key(3)' | py3kwarn - | grep --quiet 'FixHasKey'
     - echo '3 in {}' | py3kwarn -
-    - nosetests -w py3kwarn2to3/tests
     - echo '{}.has_key(3)' | py3kwarn2to3 -
 
     # Run self tests.
