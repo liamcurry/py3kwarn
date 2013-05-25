@@ -11,11 +11,17 @@ install:
 
 script:
     - python setup.py --quiet test
+
+    # Run smoke tests.
     - py3kwarn example.py | grep --quiet 'FixExcept'
     - echo '{}.has_key(3)' | py3kwarn - | grep --quiet 'FixHasKey'
     - echo '3 in {}' | py3kwarn -
     - nosetests -w py3kwarn2to3/tests
     - echo '{}.has_key(3)' | py3kwarn2to3 -
+
+    # Run self tests.
+    - py3kwarn py3kwarn setup.py
+    - py3kwarn 'py3kwarn2to3/*.py' py3kwarn2to3/fixes/ py3kwarn2to3/pgen2/
 
 after_success:
     - pip install --quiet --use-mirrors coveralls
