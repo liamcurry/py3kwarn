@@ -50,20 +50,31 @@ Usage from the command line
     $ py3kwarn example.py
     example.py:2:1: PY3K (FixApply) apply(hello, args, kwargs) -> hello(*args, **kwargs)
     example.py:5:1: PY3K (FixBasestring) basestring -> str
-    example.py:11:1: PY3K (FixCallable) callable('hello') -> isinstance('hello', collections.Callable)
     example.py:15:1: PY3K (FixDict) d.iteritems(); -> iter(d.items());
     example.py:16:1: PY3K (FixDict) d.viewvalues(); -> d.values();
     example.py:19:1: PY3K (FixExcept) try:import asdf;except E, T:pass; -> try:import asdf;except E as T:pass;
     example.py:25:1: PY3K (FixExec) exec code in ns1, ns2; -> exec(code, ns1, ns2);
     example.py:28:1: PY3K (FixExecfile) execfile('test.py') -> exec(compile(open('test.py').read(), 'test.py', 'exec'))
     example.py:31:1: PY3K (FixFilter) filter(lambda x: x, [1, 2, 3]) -> [x for x in [1, 2, 3] if x]
+    example.py:36:1: PY3K (FixFuncattrs) test.func_name; -> test.__name__;
+    example.py:37:1: PY3K (FixFuncattrs) test.func_closure; -> test.__closure__;
+    example.py:38:1: PY3K (FixFuncattrs) test.func_dict; -> test.__dict__;
     example.py:44:1: PY3K (FixHasKey) d.has_key('foobar') -> 'foobar' in d
     example.py:56:1: PY3K (FixInput) input('FixInput') -> eval(input('FixInput'))
+    example.py:66:1: PY3K (FixItertoolsImports) from itertools import imap -> 
+    example.py:67:1: PY3K (FixItertoolsImports) from itertools import ifilter; -> 
+    example.py:68:1: PY3K (FixItertoolsImports) from itertools import izip; -> 
+    example.py:69:1: PY3K (FixItertoolsImports) from itertools import ifilterfalse; -> from itertools import filterfalse;
+    example.py:62:1: PY3K (FixLong) long; -> int;
+    example.py:75:1: PY3K (FixLong) long -> int
+    example.py:50:1: PY3K (FixImports) import StringIO -> import io
+    example.py:51:1: PY3K (FixImports) import cStringIO; -> import io;
+    example.py:52:1: PY3K (FixImports) import cPickle; -> import pickle;
+    example.py:53:1: PY3K (FixImports) import __builtin__; -> import builtins;
+    example.py:62:1: PY3K (FixIsinstance) isinstance(x, (int, int)) -> isinstance(x, int)
+    example.py:63:1: PY3K (FixIsinstance) isinstance(x, (int, int)); -> isinstance(x, int);
+    example.py:11:1: PY3K (FixCallable) callable('hello') -> isinstance('hello', collections.Callable)
     example.py:59:1: PY3K (FixIntern) intern(s) -> sys.intern(s)
-    example.py:66:1: PY3K (FixItertoolsImports) from itertools import ->
-    example.py:67:1: PY3K (FixItertoolsImports) from itertools import; ->
-    example.py:68:1: PY3K (FixItertoolsImports) from itertools import; ->
-    example.py:72:1: PY3K (FixUnicode) u'Hello World' -> 'Hello World'
 
 Modifying code automatically
 ----------------------------
