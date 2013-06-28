@@ -168,3 +168,11 @@ except ImportError:
     def test_ignore_compatible_zip(self):
         self.assertFalse(
             main.warnings_for_string('enumerate(zip([1, 2], [3, 4]))\n'))
+
+    def test_raw_input(self):
+        self.assertTrue(
+            main.warnings_for_string('raw_input()\n'))
+
+    def test_ignore_compatible_raw_input(self):
+        self.assertFalse(
+            main.warnings_for_string('raw_input = input\nraw_input()\n'))
