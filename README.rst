@@ -107,8 +107,6 @@ TODO
 - Friendlier messages.
 - `A flake8 extension`_.
 - Flags to ignore certain errors
-- Compatibility mode, where warning messages provide suggestions to write
-  forwards compatible code. Make this the default.
 - Make it faster. Right now it is quite slow compared to other syntax checkers.
   Major refactoring may be necessary.
 
