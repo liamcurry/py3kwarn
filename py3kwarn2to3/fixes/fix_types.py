@@ -37,7 +37,6 @@ _TYPE_MAPPING = {
         'DictType': 'dict',
         'DictionaryType' : 'dict',
         'EllipsisType' : 'type(Ellipsis)',
-        #'FileType' : 'io.IOBase',
         'FloatType': 'float',
         'IntType': 'int',
         'ListType': 'list',
@@ -46,8 +45,6 @@ _TYPE_MAPPING = {
         'NoneType': 'type(None)',
         'NotImplementedType' : 'type(NotImplemented)',
         'SliceType' : 'slice',
-        'StringType': 'bytes', # XXX ?
-        'StringTypes' : 'str', # XXX ?
         'TupleType': 'tuple',
         'TypeType' : 'type',
         'UnicodeType': 'str',
