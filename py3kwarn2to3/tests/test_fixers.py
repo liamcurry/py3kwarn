@@ -3077,10 +3077,6 @@ class Test_types(FixerTestCase):
     fixer = "types"
 
     def test_basic_types_convert(self):
-        b = """types.StringType"""
-        a = """bytes"""
-        self.check(b, a)
-
         b = """types.DictType"""
         a = """dict"""
         self.check(b, a)
