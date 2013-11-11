@@ -146,7 +146,7 @@ def main(fixer_pkg='py3kwarn2to3.fixes', args=None):
     """
     # Set up option parser
     parser = optparse.OptionParser(usage="2to3 [options] file|dir ...")
-    parser.add_option("-d", "--doctests-only", action="store_true",
+    parser.add_option("-d", "--doctests", action="store_true",
                       help="Fix up doctests only")
     parser.add_option("-f", "--fix", action="append", default=[],
                       help="Each FIX specifies a transformation; default: all")
@@ -259,7 +259,7 @@ def main(fixer_pkg='py3kwarn2to3.fixes', args=None):
             rt.refactor_stdin()
         else:
             try:
-                rt.refactor(args, options.write, options.doctests_only,
+                rt.refactor(args, options.write, options.doctests,
                             options.processes)
             except refactor.MultiprocessingUnsupported:
                 assert options.processes > 1
